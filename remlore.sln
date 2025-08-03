@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F2BE248C-7512-4351-87A8-2EEB1CB9988F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		download.png = download.png
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remlore.APIs", "src\Remlore.APIs\Remlore.APIs.csproj", "{D543EE67-CD4C-510C-7E6F-19FB39380655}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remlore.Application", "src\Remlore.Application\Remlore.Application.csproj", "{16B93E3A-85AF-9D27-0ACD-2C929C998B3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remlore.Infrastructure", "src\Remlore.Infrastructure\Remlore.Infrastructure.csproj", "{939BA796-BE3A-7AC9-79F8-E766BC11A95A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remlore.Web", "src\Remlore.web\Remlore.Web.csproj", "{8EBE108D-EA31-4332-AB75-0822844DD2D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remlore.Domain", "src\Remlore.Domain\Remlore.Domain.csproj", "{39BB73E3-5958-4858-01DE-D7ABD0F1FCAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remlore.Identity", "src\Remlore.Identity\Remlore.Identity.csproj", "{348197E5-DB2E-5D7A-747F-6CF85D454361}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "remlore.admin", "src\Remlore.Admin\remlore.admin.esproj", "{8855CD1D-528B-A179-246A-B1A4FED10EEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D543EE67-CD4C-510C-7E6F-19FB39380655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D543EE67-CD4C-510C-7E6F-19FB39380655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D543EE67-CD4C-510C-7E6F-19FB39380655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D543EE67-CD4C-510C-7E6F-19FB39380655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16B93E3A-85AF-9D27-0ACD-2C929C998B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B93E3A-85AF-9D27-0ACD-2C929C998B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16B93E3A-85AF-9D27-0ACD-2C929C998B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16B93E3A-85AF-9D27-0ACD-2C929C998B3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939BA796-BE3A-7AC9-79F8-E766BC11A95A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939BA796-BE3A-7AC9-79F8-E766BC11A95A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939BA796-BE3A-7AC9-79F8-E766BC11A95A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939BA796-BE3A-7AC9-79F8-E766BC11A95A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EBE108D-EA31-4332-AB75-0822844DD2D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EBE108D-EA31-4332-AB75-0822844DD2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EBE108D-EA31-4332-AB75-0822844DD2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EBE108D-EA31-4332-AB75-0822844DD2D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39BB73E3-5958-4858-01DE-D7ABD0F1FCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39BB73E3-5958-4858-01DE-D7ABD0F1FCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39BB73E3-5958-4858-01DE-D7ABD0F1FCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39BB73E3-5958-4858-01DE-D7ABD0F1FCAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{348197E5-DB2E-5D7A-747F-6CF85D454361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{348197E5-DB2E-5D7A-747F-6CF85D454361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{348197E5-DB2E-5D7A-747F-6CF85D454361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{348197E5-DB2E-5D7A-747F-6CF85D454361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8855CD1D-528B-A179-246A-B1A4FED10EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8855CD1D-528B-A179-246A-B1A4FED10EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8855CD1D-528B-A179-246A-B1A4FED10EEE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8855CD1D-528B-A179-246A-B1A4FED10EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8855CD1D-528B-A179-246A-B1A4FED10EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8855CD1D-528B-A179-246A-B1A4FED10EEE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EEDFC4B-84E3-4B95-8013-207740B3F239}
+	EndGlobalSection
+EndGlobal
