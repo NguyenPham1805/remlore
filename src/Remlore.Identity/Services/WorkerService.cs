@@ -4,7 +4,7 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Remlore.Identity.Services
 {
-    public class Worker(IServiceProvider _serviceProvider) : IHostedService
+    public class WorkerService(IServiceProvider _serviceProvider) : IHostedService
     {
         public async Task StartAsync(CancellationToken cancellationToken)
         {
@@ -17,14 +17,25 @@ namespace Remlore.Identity.Services
             var scopeManager = scope.ServiceProvider.GetRequiredService<IOpenIddictScopeManager>(); // Add scope manager
 
             // Ensure 'remlore_api' scope exists
-            if (await scopeManager.FindByNameAsync("remlore_api") == null)
+            if (await scopeManager.FindByNameAsync("remlore_api", cancellationToken) == null)
             {
                 await scopeManager.CreateAsync(new OpenIddictScopeDescriptor
                 {
                     Name = "remlore_api",
                     DisplayName = "Remlore API access",
                     Resources = { "remlore_api_resource" } // Optional: Link to a resource
-                });
+                }, cancellationToken);
+            }
+
+            // Ensure 'ids_admin_api' scope exists
+            if (await scopeManager.FindByNameAsync("ids_admin_api", cancellationToken) == null)
+            {
+                await scopeManager.CreateAsync(new OpenIddictScopeDescriptor
+                {
+                    Name = "ids_admin_api",
+                    DisplayName = "Remlore IDS API access",
+                    Resources = { "remlore_admin_api_resource" } // Optional: Link to a resource
+                }, cancellationToken);
             }
 
             if (await manager.FindByClientIdAsync("remlore_api") == null)
@@ -83,29 +94,52 @@ namespace Remlore.Identity.Services
                     ConsentType = ConsentTypes.Explicit,
                     DisplayName = "MVC client application",
                     RedirectUris =
-                {
-                    new Uri("https://localhost:44338/callback/login/local")
-                },
+                    {
+                        new Uri("https://localhost:44338/callback/login/local")
+                    },
                     PostLogoutRedirectUris =
-                {
-                    new Uri("https://localhost:44338/callback/logout/local")
-                },
+                    {
+                        new Uri("https://localhost:44338/callback/logout/local")
+                    },
                     Permissions =
-                {
-                    Permissions.Endpoints.Authorization,
-                    Permissions.Endpoints.EndSession,
-                    Permissions.Endpoints.Token,
-                    Permissions.GrantTypes.AuthorizationCode,
-                    Permissions.ResponseTypes.Code,
-                    Permissions.Scopes.Email,
-                    Permissions.Scopes.Profile,
-                    Permissions.Scopes.Roles,
-                    Permissions.Prefixes.Scope + "remlore_api" // Allow MVC client to request remlore_api scope
-                },
+                    {
+                        Permissions.Endpoints.Authorization,
+                        Permissions.Endpoints.EndSession,
+                        Permissions.Endpoints.Token,
+                        Permissions.GrantTypes.AuthorizationCode,
+                        Permissions.ResponseTypes.Code,
+                        Permissions.Scopes.Email,
+                        Permissions.Scopes.Profile,
+                        Permissions.Scopes.Roles,
+                        Permissions.Prefixes.Scope + "remlore_api" // Allow MVC client to request remlore_api scope
+                    },
                     Requirements =
+                    {
+                        Requirements.Features.ProofKeyForCodeExchange
+                    }
+                });
+            }
+
+            if (await manager.FindByClientIdAsync("swagger-ids-client") == null)
+            {
+                await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
-                    Requirements.Features.ProofKeyForCodeExchange
-                }
+                    ClientId = "swagger-ids-client",
+                    ClientSecret = "swagger-ids-secret", // Hash in production if needed
+                    DisplayName = "Swagger UI For Identity Server",
+                    Permissions =
+                    {
+                        Permissions.Endpoints.Authorization,
+                        Permissions.Endpoints.Token,
+                        Permissions.GrantTypes.AuthorizationCode,
+                        Permissions.GrantTypes.RefreshToken,
+                        Permissions.ResponseTypes.Code,
+                        Permissions.Scopes.Email,
+                        Permissions.Scopes.Profile,
+                        Permissions.Scopes.Roles,
+                        Permissions.Prefixes.Scope + "ids_admin_api"
+                    },
+                    RedirectUris = { new Uri("https://localhost:5001/swagger/oauth2-redirect.html") }
                 });
             }
         }

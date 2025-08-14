@@ -16,8 +16,7 @@ namespace Remlore.Domain.Entities
         [Column(TypeName = "nvarchar(MAX)")]
         public string? Content { get; set; }
 
-        [Required]
-        public required RemloreUser Author { get; set; }
+        public required User Author { get; set; }
 
         public ICollection<PostMedia> Medias { get; set; } = [];
 

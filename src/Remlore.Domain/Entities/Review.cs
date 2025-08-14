@@ -5,7 +5,7 @@ namespace Remlore.Domain.Entities
 {
     public class Review : RemloreEntity
     {
-        public required RemloreUser User { get; set; }
+        public required User User { get; set; }
 
         public required Anime Anime { get; set; }
 
@@ -15,5 +15,9 @@ namespace Remlore.Domain.Entities
 
         [MaxLength(1024)]
         public required string Content { get; set; }
+
+        public ICollection<CommentReview> Comments { get; set; } = [];
+
+        public ICollection<CommentReviewReaction> Reactions { get; set; } = [];
     }
 }

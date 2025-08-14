@@ -4,7 +4,7 @@ namespace Remlore.Domain.Entities
 {
     public class Report : RemloreEntity
     {
-        public required RemloreUser Reporter { get; set; }
+        public required User Reporter { get; set; }
 
         public required Post Post { get; set; }
 
@@ -15,6 +15,6 @@ namespace Remlore.Domain.Entities
 
         public DateTime? ResolvedAt { get; set; }
 
-        public RemloreUser? ResolvedBy { get; set; }
+        public User? ResolvedBy { get; set; }
     }
 }

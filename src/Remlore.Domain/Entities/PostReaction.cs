@@ -6,7 +6,7 @@ namespace Remlore.Domain.Entities
 {
     public class PostReaction : RemloreEntity
     {
-        public required RemloreUser User { get; set; }
+        public required User User { get; set; }
 
         public required Post Post { get; set; }
 

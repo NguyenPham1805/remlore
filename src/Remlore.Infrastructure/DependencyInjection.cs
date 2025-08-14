@@ -11,12 +11,12 @@ namespace Remlore.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration config)
         {
-            services.AddRepositories();
             services.AddDbContext<RemloreDbContext>(options =>
             {
                 var connectionString = config.GetConnectionString("RemloreDbConnection");
                 options.UseSqlServer(connectionString);
             });
+            services.AddRepositories();
 
             return services;
         }
@@ -25,6 +25,7 @@ namespace Remlore.Infrastructure
         {
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IAnimeRepository, AnimeRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

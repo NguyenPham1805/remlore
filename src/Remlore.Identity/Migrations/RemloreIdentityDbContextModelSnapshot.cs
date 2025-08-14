@@ -382,6 +382,9 @@ namespace Remlore.Identity.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTimeOffset?>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -393,6 +396,12 @@ namespace Remlore.Identity.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LastLogin")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

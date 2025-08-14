@@ -6,7 +6,7 @@ namespace Remlore.APIs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AnimeController(IMediator _mediator) : RemloreControllerBase(_mediator)
+    public class AnimeController(IMediator _mediator) : RemloreBaseController(_mediator)
     {
         [HttpGet]
         public async Task<IActionResult> GetAnimes(GetAnimesQuery query)

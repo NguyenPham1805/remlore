@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AnimeEntity = Remlore.Domain.Entities.Anime;
 
 namespace Remlore.Application.Anime
 {
@@ -6,8 +7,8 @@ namespace Remlore.Application.Anime
     {
         public AnimeProfile()
         {
-            CreateMap<CreateAnimeRequest, Remlore.Domain.Entities.Anime>();
-            CreateMap<Remlore.Domain.Entities.Anime, AnimeDto>();
+            CreateMap<CreateAnimeRequest, AnimeEntity>();
+            CreateMap<AnimeEntity, AnimeDto>();
         }
     }
 }

@@ -8,7 +8,7 @@ using Remlore.Domain;
 
 #nullable disable
 
-namespace Domain.Migrations
+namespace Remlore.Domain.Migrations
 {
     [DbContext(typeof(RemloreDbContext))]
     partial class RemloreDbContextModelSnapshot : ModelSnapshot
@@ -22,140 +22,7 @@ namespace Domain.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("remlore.Domain.Entities.Anime", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Anime", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -180,7 +47,7 @@ namespace Domain.Migrations
                     b.ToTable("Animes");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentPost", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,8 +55,8 @@ namespace Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CommentPostId")
                         .HasColumnType("int");
@@ -219,10 +86,10 @@ namespace Domain.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("CommentPosts");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentPostReaction", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentPostReaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,8 +114,8 @@ namespace Domain.Migrations
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -256,10 +123,10 @@ namespace Domain.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CommentReactions");
+                    b.ToTable("CommentPostsReactions");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentReview", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -267,8 +134,8 @@ namespace Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CommentReviewId")
                         .HasColumnType("int");
@@ -290,6 +157,9 @@ namespace Domain.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ReviewId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
@@ -298,10 +168,12 @@ namespace Domain.Migrations
 
                     b.HasIndex("PostId");
 
+                    b.HasIndex("ReviewId");
+
                     b.ToTable("CommentReviews");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentReviewReaction", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentReviewReaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -329,8 +201,11 @@ namespace Domain.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("ReviewId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -338,12 +213,14 @@ namespace Domain.Migrations
 
                     b.HasIndex("PostId");
 
+                    b.HasIndex("ReviewId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("CommentReviewReactions");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Post", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -351,9 +228,8 @@ namespace Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -388,7 +264,7 @@ namespace Domain.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.PostMedia", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.PostMedia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -432,7 +308,7 @@ namespace Domain.Migrations
                     b.ToTable("PostMedias");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.PostReaction", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.PostReaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -457,8 +333,8 @@ namespace Domain.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -466,103 +342,10 @@ namespace Domain.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reactions");
+                    b.ToTable("PostReactions");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.RemloreUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AvatarUrl")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("BannerUrl")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Bio")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Experience")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("remloreId")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("remlore.Domain.Entities.Report", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Report", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -590,14 +373,14 @@ namespace Domain.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("ReporterId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ReporterId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ResolvedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ResolvedById")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("ResolvedById")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -610,7 +393,7 @@ namespace Domain.Migrations
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Review", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -641,8 +424,8 @@ namespace Domain.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -653,7 +436,7 @@ namespace Domain.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Tag", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -694,71 +477,81 @@ namespace Domain.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.User", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AvatarUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("BannerUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Bio")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RemloreId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Sub")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentPost", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Remlore.Domain.Entities.User", "Author")
+                        .WithMany("CommentPosts")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("remlore.Domain.Entities.CommentPost", b =>
-                {
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
-                    b.HasOne("remlore.Domain.Entities.CommentPost", null)
+                    b.HasOne("Remlore.Domain.Entities.CommentPost", null)
                         .WithMany("Replies")
                         .HasForeignKey("CommentPostId");
 
-                    b.HasOne("remlore.Domain.Entities.Post", "Post")
+                    b.HasOne("Remlore.Domain.Entities.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Author");
@@ -766,117 +559,135 @@ namespace Domain.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentPostReaction", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentPostReaction", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.CommentPost", "CommentPost")
+                    b.HasOne("Remlore.Domain.Entities.CommentPost", "CommentPost")
                         .WithMany("Reactions")
                         .HasForeignKey("CommentPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "User")
+                    b.HasOne("Remlore.Domain.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("CommentPost");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentReview", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentReview", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
+                    b.HasOne("Remlore.Domain.Entities.User", "Author")
+                        .WithMany("CommentReviews")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.CommentReview", null)
+                    b.HasOne("Remlore.Domain.Entities.CommentReview", null)
                         .WithMany("Replies")
                         .HasForeignKey("CommentReviewId");
 
-                    b.HasOne("remlore.Domain.Entities.Post", "Post")
+                    b.HasOne("Remlore.Domain.Entities.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Remlore.Domain.Entities.Review", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("ReviewId");
 
                     b.Navigation("Author");
 
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentReviewReaction", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentReviewReaction", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.CommentReview", null)
+                    b.HasOne("Remlore.Domain.Entities.CommentReview", null)
                         .WithMany("Reactions")
                         .HasForeignKey("CommentReviewId");
 
-                    b.HasOne("remlore.Domain.Entities.Post", "Post")
+                    b.HasOne("Remlore.Domain.Entities.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("Remlore.Domain.Entities.Review", null)
+                        .WithMany("Reactions")
+                        .HasForeignKey("ReviewId");
+
+                    b.HasOne("Remlore.Domain.Entities.User", "User")
+                        .WithMany("CommentReviewReactions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Post");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Post", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Post", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "Author")
+                    b.HasOne("Remlore.Domain.Entities.User", "Author")
                         .WithMany("Posts")
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.PostMedia", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.PostMedia", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.Post", "Post")
+                    b.HasOne("Remlore.Domain.Entities.Post", "Post")
                         .WithMany("Medias")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.PostReaction", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.PostReaction", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.Post", "Post")
+                    b.HasOne("Remlore.Domain.Entities.Post", "Post")
                         .WithMany("Reactions")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("Remlore.Domain.Entities.User", "User")
+                        .WithMany("PostReactions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Post");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Report", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Report", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.Post", "Post")
+                    b.HasOne("Remlore.Domain.Entities.Post", "Post")
                         .WithMany("Reports")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "Reporter")
+                    b.HasOne("Remlore.Domain.Entities.User", "Reporter")
                         .WithMany()
-                        .HasForeignKey("ReporterId");
+                        .HasForeignKey("ReporterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "ResolvedBy")
+                    b.HasOne("Remlore.Domain.Entities.User", "ResolvedBy")
                         .WithMany()
                         .HasForeignKey("ResolvedById");
 
@@ -887,50 +698,52 @@ namespace Domain.Migrations
                     b.Navigation("ResolvedBy");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Review", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Review", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.Anime", "Anime")
+                    b.HasOne("Remlore.Domain.Entities.Anime", "Anime")
                         .WithMany("Reviews")
                         .HasForeignKey("AnimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("remlore.Domain.Entities.RemloreUser", "User")
+                    b.HasOne("Remlore.Domain.Entities.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Anime");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Tag", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Tag", b =>
                 {
-                    b.HasOne("remlore.Domain.Entities.Post", null)
+                    b.HasOne("Remlore.Domain.Entities.Post", null)
                         .WithMany("Tags")
                         .HasForeignKey("PostId");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Anime", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Anime", b =>
                 {
                     b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentPost", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentPost", b =>
                 {
                     b.Navigation("Reactions");
 
                     b.Navigation("Replies");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.CommentReview", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.CommentReview", b =>
                 {
                     b.Navigation("Reactions");
 
                     b.Navigation("Replies");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.Post", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
 
@@ -943,8 +756,23 @@ namespace Domain.Migrations
                     b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("remlore.Domain.Entities.RemloreUser", b =>
+            modelBuilder.Entity("Remlore.Domain.Entities.Review", b =>
                 {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Reactions");
+                });
+
+            modelBuilder.Entity("Remlore.Domain.Entities.User", b =>
+                {
+                    b.Navigation("CommentPosts");
+
+                    b.Navigation("CommentReviewReactions");
+
+                    b.Navigation("CommentReviews");
+
+                    b.Navigation("PostReactions");
+
                     b.Navigation("Posts");
 
                     b.Navigation("Reviews");

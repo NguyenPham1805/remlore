@@ -6,7 +6,7 @@ namespace Remlore.Domain.Entities
     {
         public required Post Post { get; set; }
 
-        public required RemloreUser Author { get; set; }
+        public required User Author { get; set; }
 
         [MaxLength(500)]
         public required string Content { get; set; }

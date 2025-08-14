@@ -4,7 +4,7 @@ namespace Remlore.Domain.Entities
 {
     public class CommentReviewReaction : RemloreEntity
     {
-        public required RemloreUser User { get; set; }
+        public required User User { get; set; }
 
         public required Post Post { get; set; }
 

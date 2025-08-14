@@ -11,5 +11,11 @@ namespace Remlore.Identity.Data
 
         [MaxLength(500)]
         public string? AvatarUrl { get; set; }
+
+        public DateTimeOffset? LastLogin { get; set; }
+
+        public DateTimeOffset? CreatedAt { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

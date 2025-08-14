@@ -20,6 +20,8 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Remlore API V1");
         options.OAuthClientId("remlore_swagger_api");
         options.OAuthClientSecret("super_secret");
+        options.OAuthUsePkce();
+        options.OAuthUseBasicAuthenticationWithAccessCodeGrant();
     });
 }
 app.UseHttpsRedirection();

@@ -9,12 +9,13 @@ using OpenIddict.Server.AspNetCore;
 using Remlore.Identity.Data;
 using Remlore.Identity.Helpers;
 using Remlore.Identity.Services;
-using Remlore.Identity.ViewModels;
 using System.Security.Claims;
+using System.Text.Json;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Remlore.Identity.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AuthorizationController(
         IOpenIddictApplicationManager _applicationManager,
         IOpenIddictAuthorizationManager _authorizationManager,
@@ -130,7 +131,8 @@ namespace Remlore.Identity.Controllers
                     // Add the claims that will be persisted in the tokens.
                     identity.SetClaim(Claims.Subject, await _userManager.GetUserIdAsync(user))
                             .SetClaim(Claims.Email, await _userManager.GetEmailAsync(user))
-                            .SetClaim(Claims.Name, await _userManager.GetUserNameAsync(user))
+                            .SetClaim("DisplayName", user.DisplayName)
+                            .SetClaim("avatar", user.AvatarUrl)
                             .SetClaim(Claims.PreferredUsername, await _userManager.GetUserNameAsync(user))
                             .SetClaims(Claims.Role, [.. (await _userManager.GetRolesAsync(user))]);
 
@@ -176,85 +178,20 @@ namespace Remlore.Identity.Controllers
 
                 // In every other case, render the consent form.
                 default:
-                    return View(new AuthorizeViewModel
-                    {
-                        ApplicationName = (await _applicationManager.GetLocalizedDisplayNameAsync(application))!,
-                        Scope = request.Scope
-                    });
+                    var requestParams = Request.HasFormContentType ? Request.Form.ToDictionary() : Request.Query.ToDictionary();
+
+                    TempData["OidcRequest"] = JsonSerializer.Serialize(requestParams);
+
+                    return RedirectToPage("/Account/Consent", new { area = "Identity" });
+                    //return View(new AuthorizeViewModel
+                    //{
+                    //    ApplicationName = (await _applicationManager.GetLocalizedDisplayNameAsync(application))!,
+                    //    Scope = request.Scope
+                    //});
             }
-            //var request = HttpContext.GetOpenIddictServerRequest() ??
-            //    throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
-
-            //var parameters = _authService.ParseOAuthParameters(HttpContext, new List<string> { Parameters.Prompt });
-
-            //var result = await HttpContext.AuthenticateAsync(IdentityConstants.ApplicationScheme);
-
-            //if (!_authService.IsAuthenticated(result, request))
-            //{
-            //    return Challenge(properties: new AuthenticationProperties
-            //    {
-            //        RedirectUri = _authService.BuildRedirectUrl(HttpContext.Request, parameters)
-            //    }, new[] { IdentityConstants.ApplicationScheme });
-            //}
-
-            //var application = await _applicationManager.FindByClientIdAsync(request.ClientId) ??
-            //    throw new InvalidOperationException("Details concerning the calling client application cannot be found.");
-
-            //var consentType = await _applicationManager.GetConsentTypeAsync(application);
-
-            //// we just ignore other consent types, because they are not compliant with OAuth and OpenId Connect docs, that state that Resource Owner should grant the Client access
-            //// you might also support Implicit ConsentType - where you do not require consent screen even if `prompt=consent` provided. In that case just drop this if.
-            //// you might want to support External ConsentType - where you need to get created authorization first by admin to be able to log in.
-            //if (consentType != ConsentTypes.Explicit)
-            //{
-            //    return Forbid(
-            //        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-            //        properties: new AuthenticationProperties(new Dictionary<string, string?>
-            //        {
-            //            [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidClient,
-            //            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
-            //                "Only explicit consent clients are supported"
-            //        }));
-            //}
-
-            //var consentClaim = result.Principal.GetClaim("consent");
-
-            //// it might be extended in a way that consent claim will contain list of allowed client ids.
-            //if (consentClaim != "Grant")
-            //{
-            //    var returnUrl = HttpUtility.UrlEncode(_authService.BuildRedirectUrl(HttpContext.Request, parameters));
-            //    var consentRedirectUrl = $"/Account/Consent?returnUrl={returnUrl}";
-
-            //    return Redirect(consentRedirectUrl);
-            //}
-
-            //var userId = result.Principal.FindFirst(ClaimTypes.Email)!.Value;
-
-            //var identity = new ClaimsIdentity(
-            //    authenticationType: TokenValidationParameters.DefaultAuthenticationType,
-            //    nameType: Claims.Name,
-            //    roleType: Claims.Role);
-
-            //identity.SetClaim(Claims.Subject, userId)
-            //    .SetClaim(Claims.Email, userId)
-            //    .SetClaim(Claims.Name, userId)
-            //    .SetClaims(Claims.Role, new List<string> { "user", "admin" }.ToImmutableArray());
-
-            //identity.SetScopes(request.GetScopes());
-
-            //var resources = new List<string>();
-            //await foreach (var resource in _scopeManager.ListResourcesAsync(identity.GetScopes()))
-            //{
-            //    resources.Add(resource);
-            //}
-            //identity.SetResources(resources);
-
-            //identity.SetDestinations(c => AuthorizationService.GetDestinations(identity, c));
-
-            //return SignIn(new ClaimsPrincipal(identity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
-        [Authorize, FormValueRequired("submit.Accept")]
+        [Authorize, FormValueRequired("Accept")]
         [HttpPost("~/connect/authorize"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Accept()
         {
@@ -306,8 +243,9 @@ namespace Remlore.Identity.Controllers
             // Add the claims that will be persisted in the tokens.
             identity.SetClaim(Claims.Subject, await _userManager.GetUserIdAsync(user))
                     .SetClaim(Claims.Email, await _userManager.GetEmailAsync(user))
-                    .SetClaim(Claims.Name, await _userManager.GetUserNameAsync(user))
-                    .SetClaim(Claims.PreferredUsername, await _userManager.GetUserNameAsync(user))
+                    .SetClaim(Claims.Name, user.DisplayName)
+                    .SetClaim("DisplayName", user.DisplayName)
+                    .SetClaim("avatar", user.AvatarUrl)
                     .SetClaims(Claims.Role, [.. (await _userManager.GetRolesAsync(user))]);
 
             // Note: in this sample, the granted scopes match the requested scope
@@ -339,7 +277,7 @@ namespace Remlore.Identity.Controllers
             return SignIn(new ClaimsPrincipal(identity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
-        [Authorize, FormValueRequired("submit.Deny")]
+        [Authorize, FormValueRequired("Deny")]
         [HttpPost("~/connect/authorize"), ValidateAntiForgeryToken]
         // Notify OpenIddict that the authorization grant has been denied by the resource owner
         // to redirect the user agent to the client application using the appropriate response_mode.
@@ -413,7 +351,6 @@ namespace Remlore.Identity.Controllers
                 identity.SetClaim(Claims.Subject, await _userManager.GetUserIdAsync(user))
                         .SetClaim(Claims.Email, await _userManager.GetEmailAsync(user))
                         .SetClaim(Claims.Name, await _userManager.GetUserNameAsync(user))
-                        .SetClaim(Claims.PreferredUsername, await _userManager.GetUserNameAsync(user))
                         .SetClaims(Claims.Role, [.. (await _userManager.GetRolesAsync(user))]);
 
                 identity.SetDestinations(GetDestinations);

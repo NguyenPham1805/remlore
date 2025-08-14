@@ -1,11 +1,8 @@
 ﻿using FluentValidation;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
-using Remlore.Domain;
-using Remlore.Domain.Entities;
 using System.Reflection;
 
 namespace Remlore.Application
@@ -20,9 +17,68 @@ namespace Remlore.Application
             services.AddAutoMapper(cfg => { }, assembly);
             services.AddValidatorsFromAssembly(assembly);
             services.AddEndpointsApiExplorer();
+            services.AddSwagger();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddIdentity();
 
+            return services;
+        }
+
+        public static IServiceCollection AddIdentity(this IServiceCollection services)
+        {
+            //services.AddAuthentication(option =>
+            //{
+            //    option.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    option.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            //})
+            //    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            //    {
+            //        options.Authority = "https://localhost:5001";
+            //        options.ClientId = "remlore_api";
+            //        options.ClientSecret = "super_secret";
+            //        options.ResponseType = OpenIdConnectResponseType.Code;
+            //        options.SaveTokens = true;
+            //        options.GetClaimsFromUserInfoEndpoint = true;
+            //        options.SignedOutCallbackPath = "/";
+            //    })
+            //    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
+            //    {
+            //        jwtOptions.Authority = "https://localhost:5001"; // Your IDS App's URL
+            //        jwtOptions.Audience = "remlore_api"; // The audience your API expects
+            //        jwtOptions.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateAudience = true,
+            //            ValidateIssuer = true,
+            //            ValidateLifetime = true,
+            //            ValidateIssuerSigningKey = true,
+            //            ValidIssuer = "https://localhost:5001",
+            //            ValidAudience = "remlore_api"
+            //        };
+            //    });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+            });
+            services.AddOpenIddict()
+                .AddValidation(options =>
+                {
+                    options.SetIssuer("https://localhost:5001/");
+                    options.UseSystemNetHttp();
+                    options.UseAspNetCore();
+
+                    options.SetClientId("remlore_api");
+                    options.SetClientSecret("super_secret");
+                });
+
+            return services;
+        }
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddSwaggerGen(c =>
             {
@@ -72,69 +128,6 @@ namespace Remlore.Application
                     }
                 });
             });
-
-            return services;
-        }
-
-        public static IServiceCollection AddConfigure(this IServiceCollection services)
-        {
-            services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
-
-            return services;
-        }
-
-        public static IServiceCollection AddIdentity(this IServiceCollection services)
-        {
-            services.AddIdentity<RemloreUser, IdentityRole>()
-                .AddEntityFrameworkStores<RemloreDbContext>()
-                .AddDefaultTokenProviders();
-
-            //services.AddAuthentication(option =>
-            //{
-            //    option.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    option.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-            //})
-            //    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
-            //    {
-            //        options.Authority = "https://localhost:5001";
-            //        options.ClientId = "remlore_api";
-            //        options.ClientSecret = "super_secret";
-            //        options.ResponseType = OpenIdConnectResponseType.Code;
-            //        options.SaveTokens = true;
-            //        options.GetClaimsFromUserInfoEndpoint = true;
-            //        options.SignedOutCallbackPath = "/";
-            //    })
-            //    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtOptions =>
-            //    {
-            //        jwtOptions.Authority = "https://localhost:5001"; // Your IDS App's URL
-            //        jwtOptions.Audience = "remlore_api"; // The audience your API expects
-            //        jwtOptions.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateAudience = true,
-            //            ValidateIssuer = true,
-            //            ValidateLifetime = true,
-            //            ValidateIssuerSigningKey = true,
-            //            ValidIssuer = "https://localhost:5001",
-            //            ValidAudience = "remlore_api"
-            //        };
-            //    });
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
-            });
-            services.AddOpenIddict()
-                .AddValidation(options =>
-                {
-                    options.SetIssuer("https://localhost:5001/");
-                    options.UseSystemNetHttp();
-                    options.UseAspNetCore();
-
-                    options.SetClientId("remlore_api");
-                    options.SetClientSecret("super_secret");
-                });
 
             return services;
         }
