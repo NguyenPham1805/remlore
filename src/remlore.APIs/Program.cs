@@ -1,3 +1,5 @@
+﻿using Remlore.APIs.Apis;
+using Remlore.APIs.Services;
 using Remlore.Application;
 using Remlore.Infrastructure;
 
@@ -6,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApiVersionService();
 
 builder.Services.AddControllers();
 
@@ -30,6 +33,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapRemloreApi();
 
 app.Run();

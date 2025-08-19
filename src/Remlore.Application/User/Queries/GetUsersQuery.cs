@@ -4,16 +4,16 @@ using Remlore.Domain.Enums;
 
 namespace Remlore.Application.User
 {
-    public class GetUsersQuery(string? keyword, EUserSortBy? sortBy, bool isDescending, int pageNumber = 1, int pageSize = 1) : GetQuery<Pagination<UserDto>>
+    public record GetUsersQuery : GetQuery<Pagination<UserDto>>
     {
-        public string? Keyword { get; set; } = keyword;
+        public string? Keyword { get; set; }
 
-        public EUserSortBy? SortBy { get; set; } = sortBy;
+        public EUserSortBy? SortBy { get; set; }
 
-        public bool IsDescending { get; set; } = isDescending;
+        public bool IsDescending { get; set; }
 
-        public int PageNumber { get; set; } = pageNumber;
+        public int PageNumber { get; set; } = 1;
 
-        public int PageSize { get; set; } = pageSize;
+        public int PageSize { get; set; } = 10;
     }
 }

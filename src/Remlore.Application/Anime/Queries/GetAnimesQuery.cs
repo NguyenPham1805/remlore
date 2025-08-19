@@ -2,7 +2,7 @@
 
 namespace Remlore.Application.Anime
 {
-    public class GetAnimesQuery : GetQuery<ICollection<AnimeDto>>
+    public record GetAnimesQuery : GetQuery<ICollection<AnimeDto>>
     {
     }
 }

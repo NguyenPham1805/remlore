@@ -2,7 +2,7 @@
 
 namespace Remlore.Application.User
 {
-    public class GetCurrentUserQuery : GetQuery<UserDto>
+    public record GetCurrentUserQuery : GetQuery<UserDto>
     {
     }
 }

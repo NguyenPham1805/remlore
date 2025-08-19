@@ -1,9 +1,9 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
-using System.Reflection;
 
 namespace Remlore.Application
 {
@@ -16,7 +16,6 @@ namespace Remlore.Application
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
             services.AddAutoMapper(cfg => { }, assembly);
             services.AddValidatorsFromAssembly(assembly);
-            services.AddEndpointsApiExplorer();
             services.AddSwagger();
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
