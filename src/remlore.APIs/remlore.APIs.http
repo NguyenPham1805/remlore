@@ -1,0 +1,6 @@
+@remlore.APIs_HostAddress = http://localhost:5076
+
+GET {{remlore.APIs_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

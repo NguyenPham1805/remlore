@@ -1,0 +1,29 @@
+﻿@page
+@model ConsentModel
+@{
+    ViewData["Title"] = "Consent";
+}
+
+@using Microsoft.Extensions.Primitives
+
+<div class="jumbotron">
+    <h1>Authorization</h1>
+
+    <p class="lead text-left">Do you want to grant <strong>@Model.ApplicationName</strong> access to your data? (scopes requested: @Model.Scope)</p>
+
+    <form asp-controller="Authorization" asp-action="Authorize" method="post">
+        @* Flow the request parameters so they can be received by the Accept/Reject actions: *@
+        @foreach (var parameter in @Model.Parameters)
+        {
+            <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+        }
+
+        <input class="btn btn-lg btn-success" name="Accept" type="submit" value="Yes" />
+        <input class="btn btn-lg btn-danger" name="Deny" type="submit" value="No" />
+    </form>
+</div>
+
+@*<form method="post" asp-action="Consent" asp-route-returnUrl="@Model.ReturnUrl">
+    <input type="hidden" name="request" value="@Model.RawQueryString" />
+    <button type="submit" name="accept" value="true">Yes</button>
+</form>*@
