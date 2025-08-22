@@ -1,6 +1,6 @@
 ﻿namespace Remlore.Application.User
 {
-    public class UserDto
+    public record UserDto
     {
         public int Id { get; set; }
 
@@ -14,6 +14,6 @@
 
         public DateTime? LastLogin { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

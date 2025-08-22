@@ -5,7 +5,7 @@ namespace Remlore.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        public Task<User?> GetUserByIdAsync(int userId, CancellationToken cancellationToken);
+        public Task<User?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken);
 
         public Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken);
 
@@ -25,6 +25,6 @@ namespace Remlore.Domain.Interfaces
 
         public Task<bool> UpdateUserAsync(User user, CancellationToken cancellationToken);
 
-        public Task<bool> DeleteUserAsync(int userId, CancellationToken cancellationToken);
+        public Task<bool> DeleteUserAsync(Guid userId, CancellationToken cancellationToken);
     }
 }

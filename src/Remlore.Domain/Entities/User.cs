@@ -2,7 +2,7 @@
 
 namespace Remlore.Domain.Entities
 {
-    public class User : RemloreEntity
+    public class User : RemloreEntity<Guid>
     {
         [Required]
         [MaxLength(255)]

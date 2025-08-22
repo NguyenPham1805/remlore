@@ -14,7 +14,7 @@ namespace Remlore.APIs.Apis
             v1.MapGet("/", async (IMediator mediator, [AsParameters] GetUsersQuery query) => await mediator.Send(query));
             v1.MapGet("/me", async (IMediator mediator) => await mediator.Send(new GetCurrentUserQuery()));
             v1.MapPost("/create-account", async (IMediator mediator, [AsParameters] CreateUserCommand command) => await mediator.Send(command));
-            v1.MapPatch("/{id:int}", async (IMediator mediator, int id, [AsParameters] UpdateUserCommand command) =>
+            v1.MapPatch("/{id:guid}", async (IMediator mediator, Guid id, [AsParameters] UpdateUserCommand command) =>
             {
                 command.Id = id;
                 return await mediator.Send(command);

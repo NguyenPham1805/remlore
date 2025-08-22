@@ -22,7 +22,7 @@ namespace Remlore.Infrastructure.Repositories
                 .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
         }
 
-        public async Task<User?> GetUserByIdAsync(int userId, CancellationToken cancellationToken)
+        public async Task<User?> GetUserByIdAsync(Guid userId, CancellationToken cancellationToken)
         {
             return await _context.Users
                 .AsNoTracking()
@@ -96,7 +96,7 @@ namespace Remlore.Infrastructure.Repositories
             var result = await _context.SaveChangesAsync(cancellationToken);
             return result > 0;
         }
-        public async Task<bool> DeleteUserAsync(int userId, CancellationToken cancellationToken)
+        public async Task<bool> DeleteUserAsync(Guid userId, CancellationToken cancellationToken)
         {
             await _context.Users
                 .Where(u => u.Id == userId)

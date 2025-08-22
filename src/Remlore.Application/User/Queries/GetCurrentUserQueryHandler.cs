@@ -5,7 +5,7 @@ using Remlore.Domain.Interfaces;
 
 namespace Remlore.Application.User
 {
-    internal class GetCurrentUserQueryHandler(IUserRepository _userRepository, IMapper _mapper, IHttpContextAccessor _httpContext) : IRequestHandler<GetCurrentUserQuery, UserDto>
+    public class GetCurrentUserQueryHandler(IUserRepository _userRepository, IMapper _mapper, IHttpContextAccessor _httpContext) : IRequestHandler<GetCurrentUserQuery, UserDto>
     {
         public async Task<UserDto> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
         {

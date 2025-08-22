@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Remlore.Identity.Apis;
 using Remlore.Identity.Data;
 using Remlore.Identity.Models;
 using Remlore.Identity.Seeds;
 using Remlore.Identity.Services;
-using System.Reflection;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,15 +22,15 @@ builder.Services.AddIdentity<RemloreIdsUser, IdentityRole>(options =>
                 {
                     options.User.RequireUniqueEmail = true;
 
-                    options.Password.RequireDigit = false; // Không bắt phải có số
-                    options.Password.RequireLowercase = false; // Không bắt phải có chữ thường
-                    options.Password.RequireNonAlphanumeric = false; // Không bắt ký tự đặc biệt
-                    options.Password.RequireUppercase = false; // Không bắt buộc chữ in
-                    options.Password.RequiredLength = 3; // Số ký tự tối thiểu của password
-                    options.Password.RequiredUniqueChars = 1; // Số ký tự riêng biệt
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 3;
+                    options.Password.RequiredUniqueChars = 1;
 
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // Khóa 5 phút
-                    options.Lockout.MaxFailedAccessAttempts = 5; // Thất bại 5 lầ thì khóa
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
                     options.Lockout.AllowedForNewUsers = true;
 
                     options.SignIn.RequireConfirmedEmail = true;
@@ -197,6 +198,7 @@ app.MapStaticAssets();
 app.MapControllers();
 app.MapDefaultControllerRoute();
 app.MapRazorPages();
+app.MapRemloreIdsApi();
 
 app.Run();
 

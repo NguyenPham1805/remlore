@@ -2,7 +2,7 @@
 
 namespace Remlore.Application.User
 {
-    public class UpdateUserCommand : UpdateCommand<int, UpdateUserDto, bool>
+    public class UpdateUserCommand : UpdateCommand<Guid, UpdateUserDto, bool>
     {
     }
 }
