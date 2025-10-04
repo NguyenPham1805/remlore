@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Remlore.Identity.Data;
-using System.Security.Claims;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Remlore.Identity.Seeds
@@ -15,7 +15,7 @@ namespace Remlore.Identity.Seeds
 
             const string adminRoleName = "Administrator";
             const string adminEmail = "admin@remlore.com";
-            const string adminPassword = "admin@123";
+            const string adminPassword = "Admin@123";
 
             if (!await roleManager.RoleExistsAsync(adminRoleName))
             {

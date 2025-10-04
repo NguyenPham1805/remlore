@@ -103,9 +103,10 @@ namespace Remlore.Application
                             Scopes = new Dictionary<string, string>
                             {
                                 //{ "openid", "Access to your identity" },
-                                //{ "profile", "Access to your profile" },
-                                //{ "email", "Access to your email" },
-                                { "remlore_api", "Access to Remlore API" } // Scope for your API
+                                { "profile", "Access to profile" },
+                                { "email", "Access to email" },
+                                { "remlore_api", "Access to Remlore API" }, // Scope for your API
+                                { "offline_access", "refresh token" }
                             }
                         }
                     },
@@ -123,7 +124,7 @@ namespace Remlore.Application
                                 Id = "oauth2"
                             }
                         },
-                        new List<string> { "remlore_api" } // Scopes required for API access
+                        new List<string> { "profile", "email", "remlore_api", "offline_access" } // Scopes required for API access
                     }
                 });
             });

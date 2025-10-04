@@ -53,7 +53,14 @@ builder.Services.AddOpenIddict()
                         .SetUserInfoEndpointUris("connect/user-info");
 
                     options.DisableAccessTokenEncryption();
-                    options.RegisterScopes(Scopes.Email, Scopes.Profile, Scopes.Roles);
+
+                    options.AllowRefreshTokenFlow();
+
+                    options.RegisterScopes(
+                        Scopes.Email,
+                        Scopes.Profile,
+                        Scopes.Roles,
+                        Scopes.OfflineAccess);
 
                     options
                         .AllowAuthorizationCodeFlow()
@@ -68,14 +75,18 @@ builder.Services.AddOpenIddict()
                         .EnableTokenEndpointPassthrough()
                         .EnableStatusCodePagesIntegration();
                 })
-                .AddValidation(options =>
+                .AddValidation(ops =>
                 {
-                    options.UseLocalServer();
-                    options.UseAspNetCore();
+                    ops.SetIssuer("https://localhost:5001/");
+                    ops.AddAudiences("remlore_api");
+                    ops.UseSystemNetHttp();
+                    ops.UseAspNetCore();
                 });
 
 builder.Services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly());
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "IDS Admin Api", Version = "v1" });

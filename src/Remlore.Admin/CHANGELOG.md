@@ -1,106 +1,16 @@
-### v3.0.0
+This file explains how Visual Studio created the project.
 
-###### Apr 3, 2025
+The following tools were used to generate this project:
+- Angular CLI (ng)
 
-- Support MUI v7.
-- Support React v19.
-- Support Eslint v9.
-- Upgrade and restructure the directory.
-- Upgrade some dependencies to the latest versions.
-
----
-
-### v2.0.0
-
-###### Aug 24, 2024
-
-- [New] Migrate to typescript.
-- Upgrade and restructure the directory.
-- Upgrade some dependencies to the latest versions.
-
----
-
-### v1.8.0
-
-###### Wed 11, 2023
-
-- [New] Migrate to vite.js.
-- Upgrade and restructure the directory.
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.7.0
-
-###### Feb 21, 2023
-
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.6.0
-
-###### Oct 17, 2022
-
-- Upgrade and restructure the directory.
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.5.0
-
-###### Jul 04, 2022
-
-- Support react 18.
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.4.0
-
-###### Apr 12, 2022
-
-- Update `src/components`.
-- Update `src/sections`.
-- Update `src/pages`.
-- Update `src/layouts`.
-- Update `src/theme`.
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.3.0
-
-###### Feb 21, 2022
-
-- Support react-script v5.0.0
-- Source code improvement
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.2.0
-
-###### Sep 18, 2021
-
-- Support MIU v5.0.0 official release
-- Upgrade some dependencies to the latest versions
-- Update `src/theme/typography.js`
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.1.0
-
-###### Jul 23, 2021
-
-- Support MUI v5.0.0-beta.1
-- Upgrade some dependencies to the latest versions
-
----
-
-### v1.0.0
-
-###### Jun 28, 2021
-
-Initial release.
+The following steps were used to generate this project:
+- Create Angular project with ng: `ng new Remlore.Admin --defaults --skip-install --skip-git --no-standalone `.
+- Update angular.json with port.
+- Create project file (`Remlore.Admin.esproj`).
+- Create `launch.json` to enable debugging.
+- Update package.json to add `jest-editor-support`.
+- Update `start` script in `package.json` to specify host.
+- Add `karma.conf.js` for unit tests.
+- Update `angular.json` to point to `karma.conf.js`.
+- Add project to solution.
+- Write this file.

@@ -38,7 +38,7 @@ namespace Remlore.Identity.Services
                 }, cancellationToken);
             }
 
-            if (await manager.FindByClientIdAsync("remlore_api") == null)
+            if (await manager.FindByClientIdAsync("remlore_api", cancellationToken) == null)
             {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
@@ -53,10 +53,10 @@ namespace Remlore.Identity.Services
                         Permissions.Prefixes.Scope + "openid", // Added openid scope for client credentials
                         Permissions.Prefixes.Scope + "remlore_api" // Allow this client to request remlore_api scope
                     }
-                });
+                }, cancellationToken);
             }
 
-            if (await manager.FindByClientIdAsync("remlore_swagger_api") == null)
+            if (await manager.FindByClientIdAsync("remlore_swagger_api", cancellationToken) == null)
             {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
@@ -82,10 +82,10 @@ namespace Remlore.Identity.Services
                     //{
                     //    Requirements.Features.ProofKeyForCodeExchange
                     //}
-                });
+                }, cancellationToken);
             }
 
-            if (await manager.FindByClientIdAsync("mvc") == null)
+            if (await manager.FindByClientIdAsync("mvc", cancellationToken) == null)
             {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
@@ -111,16 +111,17 @@ namespace Remlore.Identity.Services
                         Permissions.Scopes.Email,
                         Permissions.Scopes.Profile,
                         Permissions.Scopes.Roles,
-                        Permissions.Prefixes.Scope + "remlore_api" // Allow MVC client to request remlore_api scope
+                        Permissions.Prefixes.Scope + "remlore_api", // Allow MVC client to request remlore_api scope
+                        Permissions.Prefixes.Scope + Scopes.OfflineAccess
                     },
                     Requirements =
                     {
                         Requirements.Features.ProofKeyForCodeExchange
                     }
-                });
+                }, cancellationToken);
             }
 
-            if (await manager.FindByClientIdAsync("swagger-ids-client") == null)
+            if (await manager.FindByClientIdAsync("swagger-ids-client", cancellationToken) == null)
             {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
@@ -137,10 +138,60 @@ namespace Remlore.Identity.Services
                         Permissions.Scopes.Email,
                         Permissions.Scopes.Profile,
                         Permissions.Scopes.Roles,
-                        Permissions.Prefixes.Scope + "ids_admin_api"
+                        Permissions.Prefixes.Scope + "ids_admin_api",
+                        Permissions.Prefixes.Scope + Scopes.OfflineAccess
                     },
                     RedirectUris = { new Uri("https://localhost:5001/swagger/oauth2-redirect.html") }
-                });
+                }, cancellationToken);
+            }
+
+            if (await manager.FindByClientIdAsync("remlore_admin_app", cancellationToken) == null)
+            {
+                await manager.CreateAsync(new OpenIddictApplicationDescriptor
+                {
+                    ClientId = "remlore_admin_app",
+                    ClientSecret = "remlore_admin_app_super_secret",
+                    DisplayName = "Remlore Admin App",
+                    RedirectUris = { new Uri("https://localhost:4200/auth/callback") },
+                    PostLogoutRedirectUris = { new Uri("https://localhost:4200/") },
+                    Permissions =
+                    {
+                        Permissions.Endpoints.Authorization,
+                        Permissions.Endpoints.Token,
+                        Permissions.GrantTypes.AuthorizationCode,
+                        Permissions.ResponseTypes.Code,
+                        // Allow SPA to request these scopes:
+                        Permissions.Scopes.Email,
+                        Permissions.Prefixes.Scope + Scopes.OpenId,
+                        Permissions.Prefixes.Scope + Scopes.Profile,
+                        Permissions.Prefixes.Scope + "ids_admin_api" // Allow this client to request ids_admin_api scope
+                    },
+                    Requirements =
+                    {
+                        Requirements.Features.ProofKeyForCodeExchange // PKCE required
+                    }
+                }, cancellationToken);
+            }
+
+            if (await manager.FindByClientIdAsync("remlore_forum", cancellationToken) == null)
+            {
+                await manager.CreateAsync(new OpenIddictApplicationDescriptor
+                {
+                    ClientId = "remlore_forum",
+                    ClientSecret = "remlore_forum_super_secret",
+                    DisplayName = "Remlore Forum App",
+                    RedirectUris = { new Uri("https://localhost:3000/auth/callback") },
+                    Permissions =
+                    {
+                        Permissions.Endpoints.Token,
+                        Permissions.GrantTypes.ClientCredentials,
+                        Permissions.Prefixes.Scope + "ids_admin_api" // Allow this client to request ids_admin_api scope
+                    },
+                    Requirements =
+                    {
+                        Requirements.Features.ProofKeyForCodeExchange // PKCE required
+                    }
+                }, cancellationToken);
             }
         }
 
