@@ -6,14 +6,15 @@ import { NbThemeService } from '@nebular/theme';
 import { registerMap } from 'echarts';
 
 @Component({
-  selector: 'ngx-bubble-map',
-  styleUrls: ['./bubble-map.component.scss'],
-  template: `
+    selector: 'ngx-bubble-map',
+    styleUrls: ['./bubble-map.component.scss'],
+    template: `
     <nb-card>
       <nb-card-header>Bubble Maps</nb-card-header>
       <div echarts [options]="options" class="echarts"></div>
     </nb-card>
   `,
+    standalone: false
 })
 export class BubbleMapComponent implements OnDestroy {
 

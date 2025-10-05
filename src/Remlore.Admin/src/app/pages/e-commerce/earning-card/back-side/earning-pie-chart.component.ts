@@ -3,9 +3,9 @@ import { NbThemeService } from '@nebular/theme';
 import { delay, takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-earning-pie-chart',
-  styleUrls: ['./earning-card-back.component.scss'],
-  template: `
+    selector: 'ngx-earning-pie-chart',
+    styleUrls: ['./earning-card-back.component.scss'],
+    template: `
     <div echarts
          class="echart"
          [options]="options"
@@ -13,6 +13,7 @@ import { delay, takeWhile } from 'rxjs/operators';
          (chartClick)="onChartClick($event)">
     </div>
   `,
+    standalone: false
 })
 export class EarningPieChartComponent implements AfterViewInit, OnDestroy {
 

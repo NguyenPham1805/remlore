@@ -4,14 +4,15 @@ import { NbThemeService } from '@nebular/theme';
 import { LayoutService } from '../../../../@core/utils';
 
 @Component({
-  selector: 'ngx-stats-ares-chart',
-  styleUrls: ['stats-card-back.component.scss'],
-  template: `
+    selector: 'ngx-stats-ares-chart',
+    styleUrls: ['stats-card-back.component.scss'],
+    template: `
     <div echarts [options]="option"
          class="echart"
          (chartInit)="onChartInit($event)">
     </div>
   `,
+    standalone: false
 })
 export class StatsAreaChartComponent implements AfterViewInit, OnDestroy {
 

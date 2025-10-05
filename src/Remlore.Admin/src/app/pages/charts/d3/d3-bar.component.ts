@@ -2,8 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-d3-bar',
-  template: `
+    selector: 'ngx-d3-bar',
+    template: `
     <ngx-charts-bar-vertical
       [scheme]="colorScheme"
       [results]="results"
@@ -14,6 +14,7 @@ import { NbThemeService } from '@nebular/theme';
       [yAxisLabel]="yAxisLabel">
     </ngx-charts-bar-vertical>
   `,
+    standalone: false
 })
 export class D3BarComponent implements OnDestroy {
 

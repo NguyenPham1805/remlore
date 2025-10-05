@@ -2,8 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-d3-line',
-  template: `
+    selector: 'ngx-d3-line',
+    template: `
     <ngx-charts-line-chart
       [scheme]="colorScheme"
       [results]="multi"
@@ -16,6 +16,7 @@ import { NbThemeService } from '@nebular/theme';
       [yAxisLabel]="yAxisLabel">
     </ngx-charts-line-chart>
   `,
+    standalone: false
 })
 export class D3LineComponent implements OnDestroy {
   multi = [

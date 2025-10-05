@@ -5,9 +5,10 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
 
 
 @Component({
-  selector: 'ngx-visitors-statistics',
-  styleUrls: ['./visitors-statistics.component.scss'],
-  templateUrl: './visitors-statistics.component.html',
+    selector: 'ngx-visitors-statistics',
+    styleUrls: ['./visitors-statistics.component.scss'],
+    templateUrl: './visitors-statistics.component.html',
+    standalone: false
 })
 export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDestroy {
 

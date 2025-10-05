@@ -5,9 +5,10 @@ import { takeWhile } from 'rxjs/operators';
 import { UserActivityData, UserActive } from '../../../@core/data/user-activity';
 
 @Component({
-  selector: 'ngx-user-activity',
-  styleUrls: ['./user-activity.component.scss'],
-  templateUrl: './user-activity.component.html',
+    selector: 'ngx-user-activity',
+    styleUrls: ['./user-activity.component.scss'],
+    templateUrl: './user-activity.component.html',
+    standalone: false
 })
 export class ECommerceUserActivityComponent implements OnDestroy {
 

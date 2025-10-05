@@ -6,9 +6,10 @@ import { forkJoin } from 'rxjs';
 
 
 @Component({
-  selector: 'ngx-ecommerce-visitors-analytics',
-  styleUrls: ['./visitors-analytics.component.scss'],
-  templateUrl: './visitors-analytics.component.html',
+    selector: 'ngx-ecommerce-visitors-analytics',
+    styleUrls: ['./visitors-analytics.component.scss'],
+    templateUrl: './visitors-analytics.component.html',
+    standalone: false
 })
 export class ECommerceVisitorsAnalyticsComponent implements OnDestroy {
   private alive = true;

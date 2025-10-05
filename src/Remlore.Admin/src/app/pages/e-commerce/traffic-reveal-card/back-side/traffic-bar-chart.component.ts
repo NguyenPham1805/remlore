@@ -6,14 +6,15 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
 declare const echarts: any;
 
 @Component({
-  selector: 'ngx-traffic-bar-chart',
-  template: `
+    selector: 'ngx-traffic-bar-chart',
+    template: `
     <div echarts
          [options]="option"
          class="echart"
          (chartInit)="onChartInit($event)">
     </div>
   `,
+    standalone: false
 })
 export class TrafficBarChartComponent implements AfterViewInit, OnDestroy, OnChanges {
 

@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'ngx-accordion',
-  templateUrl: 'accordion.component.html',
-  styleUrls: ['accordion.component.scss'],
+    selector: 'ngx-accordion',
+    templateUrl: 'accordion.component.html',
+    styleUrls: ['accordion.component.scss'],
+    standalone: false
 })
 export class AccordionComponent {
 

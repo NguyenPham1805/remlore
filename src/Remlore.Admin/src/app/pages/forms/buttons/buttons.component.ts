@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NbComponentShape, NbComponentSize, NbComponentStatus } from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-buttons',
-  styleUrls: ['./buttons.component.scss'],
-  templateUrl: './buttons.component.html',
+    selector: 'ngx-buttons',
+    styleUrls: ['./buttons.component.scss'],
+    templateUrl: './buttons.component.html',
+    standalone: false
 })
 export class ButtonsComponent {
   statuses: NbComponentStatus[] = [ 'primary', 'success', 'info', 'warning', 'danger' ];

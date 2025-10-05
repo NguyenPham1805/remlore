@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'ngx-stepper',
-  templateUrl: 'stepper.component.html',
-  styleUrls: ['stepper.component.scss'],
+    selector: 'ngx-stepper',
+    templateUrl: 'stepper.component.html',
+    styleUrls: ['stepper.component.scss'],
+    standalone: false
 })
 export class StepperComponent implements OnInit {
 

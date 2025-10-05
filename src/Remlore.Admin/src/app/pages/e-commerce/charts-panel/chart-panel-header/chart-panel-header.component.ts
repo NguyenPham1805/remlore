@@ -4,9 +4,10 @@ import { takeWhile } from 'rxjs/operators';
 
 
 @Component({
-  selector: 'ngx-chart-panel-header',
-  styleUrls: ['./chart-panel-header.component.scss'],
-  templateUrl: './chart-panel-header.component.html',
+    selector: 'ngx-chart-panel-header',
+    styleUrls: ['./chart-panel-header.component.scss'],
+    templateUrl: './chart-panel-header.component.html',
+    standalone: false
 })
 export class ChartPanelHeaderComponent implements OnDestroy {
 

@@ -5,9 +5,10 @@ import { switchMap, takeWhile } from 'rxjs/operators';
 import { LiveUpdateChart, EarningData } from '../../../../@core/data/earning';
 
 @Component({
-  selector: 'ngx-earning-card-front',
-  styleUrls: ['./earning-card-front.component.scss'],
-  templateUrl: './earning-card-front.component.html',
+    selector: 'ngx-earning-card-front',
+    styleUrls: ['./earning-card-front.component.scss'],
+    templateUrl: './earning-card-front.component.html',
+    standalone: false
 })
 export class EarningCardFrontComponent implements OnDestroy, OnInit {
   private alive = true;

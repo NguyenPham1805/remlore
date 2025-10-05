@@ -8,9 +8,10 @@ import { ProfitChart } from '../../../@core/data/profit-chart';
 import { OrderProfitChartSummary, OrdersProfitChartData } from '../../../@core/data/orders-profit-chart';
 
 @Component({
-  selector: 'ngx-ecommerce-charts',
-  styleUrls: ['./charts-panel.component.scss'],
-  templateUrl: './charts-panel.component.html',
+    selector: 'ngx-ecommerce-charts',
+    styleUrls: ['./charts-panel.component.scss'],
+    templateUrl: './charts-panel.component.html',
+    standalone: false
 })
 export class ECommerceChartsPanelComponent implements OnDestroy {
 

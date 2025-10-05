@@ -4,8 +4,8 @@ import './ckeditor.loader';
 import 'ckeditor';
 
 @Component({
-  selector: 'ngx-ckeditor',
-  template: `
+    selector: 'ngx-ckeditor',
+    template: `
     <nb-card>
       <nb-card-header>
         CKEditor
@@ -15,6 +15,7 @@ import 'ckeditor';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class CKEditorComponent {
 }

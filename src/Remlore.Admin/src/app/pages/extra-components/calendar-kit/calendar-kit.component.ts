@@ -5,6 +5,7 @@ import { CalendarKitMonthCellComponent } from './month-cell/month-cell.component
     selector: 'ngx-calendar-kit',
     templateUrl: 'calendar-kit.component.html',
     styleUrls: ['calendar-kit.component.scss'],
+    standalone: false
 })
 export class CalendarKitFullCalendarShowcaseComponent {
   month = new Date();

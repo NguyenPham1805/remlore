@@ -3,9 +3,10 @@ import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-traffic-cards-header',
-  styleUrls: ['./traffic-cards-header.component.scss'],
-  templateUrl: './traffic-cards-header.component.html',
+    selector: 'ngx-traffic-cards-header',
+    styleUrls: ['./traffic-cards-header.component.scss'],
+    templateUrl: './traffic-cards-header.component.html',
+    standalone: false
 })
 export class TrafficCardsHeaderComponent implements OnDestroy {
   private alive = true;

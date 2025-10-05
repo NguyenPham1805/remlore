@@ -5,9 +5,9 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
 
 
 @Component({
-  selector: 'ngx-country-orders-chart',
-  styleUrls: ['./country-orders-chart.component.scss'],
-  template: `
+    selector: 'ngx-country-orders-chart',
+    styleUrls: ['./country-orders-chart.component.scss'],
+    template: `
     <div class="header">
       <span class="caption">Selected Country/Region</span>
       <h2 class="h4">{{ countryName }}</h2>
@@ -18,6 +18,7 @@ import { LayoutService } from '../../../../@core/utils/layout.service';
          (chartInit)="onChartInit($event)">
     </div>
   `,
+    standalone: false
 })
 export class CountryOrdersChartComponent implements OnDestroy, OnChanges {
 

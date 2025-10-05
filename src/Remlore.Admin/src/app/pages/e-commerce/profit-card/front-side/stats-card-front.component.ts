@@ -3,9 +3,10 @@ import { ProfitBarAnimationChartData } from '../../../../@core/data/profit-bar-a
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-stats-card-front',
-  styleUrls: ['./stats-card-front.component.scss'],
-  templateUrl: './stats-card-front.component.html',
+    selector: 'ngx-stats-card-front',
+    styleUrls: ['./stats-card-front.component.scss'],
+    templateUrl: './stats-card-front.component.html',
+    standalone: false
 })
 export class StatsCardFrontComponent {
 

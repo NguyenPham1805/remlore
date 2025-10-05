@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NewsService } from '../news.service';
 
 @Component({
-  selector: 'ngx-infinite-list',
-  templateUrl: 'infinite-list.component.html',
-  styleUrls: ['infinite-list.component.scss'],
+    selector: 'ngx-infinite-list',
+    templateUrl: 'infinite-list.component.html',
+    styleUrls: ['infinite-list.component.scss'],
+    standalone: false
 })
 export class InfiniteListComponent {
 

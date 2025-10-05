@@ -2,10 +2,11 @@ import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
-  selector: 'ngx-chartjs-bar-horizontal',
-  template: `
+    selector: 'ngx-chartjs-bar-horizontal',
+    template: `
     <chart type="horizontalBar" [data]="data" [options]="options"></chart>
   `,
+    standalone: false
 })
 export class ChartjsBarHorizontalComponent implements OnDestroy {
   data: any;

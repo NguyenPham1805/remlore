@@ -3,9 +3,10 @@ import { PieChart, EarningData } from '../../../../@core/data/earning';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-earning-card-back',
-  styleUrls: ['./earning-card-back.component.scss'],
-  templateUrl: './earning-card-back.component.html',
+    selector: 'ngx-earning-card-back',
+    styleUrls: ['./earning-card-back.component.scss'],
+    templateUrl: './earning-card-back.component.html',
+    standalone: false
 })
 export class EarningCardBackComponent implements OnDestroy {
   private alive = true;

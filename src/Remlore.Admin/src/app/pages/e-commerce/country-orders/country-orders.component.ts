@@ -4,9 +4,9 @@ import { takeWhile } from 'rxjs/operators';
 import { CountryOrderData } from '../../../@core/data/country-order';
 
 @Component({
-  selector: 'ngx-country-orders',
-  styleUrls: ['./country-orders.component.scss'],
-  template: `
+    selector: 'ngx-country-orders',
+    styleUrls: ['./country-orders.component.scss'],
+    template: `
     <nb-card [size]="breakpoint.width >= breakpoints.md ? 'medium' : 'giant'">
       <nb-card-header>Country Orders Statistics</nb-card-header>
       <nb-card-body>
@@ -21,6 +21,7 @@ import { CountryOrderData } from '../../../@core/data/country-order';
       </nb-card-body>
     </nb-card>
   `,
+    standalone: false
 })
 export class CountryOrdersComponent implements OnInit, OnDestroy {
 

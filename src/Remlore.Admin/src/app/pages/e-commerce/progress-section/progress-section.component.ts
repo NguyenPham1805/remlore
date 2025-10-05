@@ -3,9 +3,10 @@ import { ProgressInfo, StatsProgressBarData } from '../../../@core/data/stats-pr
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: 'ngx-progress-section',
-  styleUrls: ['./progress-section.component.scss'],
-  templateUrl: './progress-section.component.html',
+    selector: 'ngx-progress-section',
+    styleUrls: ['./progress-section.component.scss'],
+    templateUrl: './progress-section.component.html',
+    standalone: false
 })
 export class ECommerceProgressSectionComponent implements OnDestroy {
 
