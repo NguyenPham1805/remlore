@@ -9,11 +9,19 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2020",
-    "lib": ["es2020", "dom"],
+    "target": "ES2022",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "paths": {
-      "@remlore/*": ["app/*"]
+      "@remlore/*": [
+        "app/*"
+      ]
     },
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "useDefineForClassFields": false
   }
 }
