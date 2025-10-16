@@ -1,197 +1,153 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { delay, takeWhile } from 'rxjs/operators';
-import { LayoutService } from '../../../../@core/utils/layout.service';
-
+import { AfterViewInit, Component, Input, OnDestroy } from "@angular/core";
+import { NbThemeService } from "@nebular/theme";
+import { LayoutService } from "@remlore/core/utils/layout.service";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { EChartsOption, graphic } from "echarts";
+import { ECharts } from "echarts/core";
+import { NgxEchartsModule } from "ngx-echarts";
+import { delay, takeWhile } from "rxjs/operators";
+import { NgxLegendItemColor } from "../../legend-chart/enum.legend-item-color";
+import { ECommerceLegendChartComponent } from "../../legend-chart/legend-chart.component";
 
 @Component({
-    selector: 'ngx-visitors-statistics',
-    styleUrls: ['./visitors-statistics.component.scss'],
-    templateUrl: './visitors-statistics.component.html',
-    standalone: false
+  selector: "rl-visitors-statistics",
+  styleUrls: ["./visitors-statistics.component.scss"],
+  templateUrl: "./visitors-statistics.component.html",
+  imports: [ECommerceLegendChartComponent, NgxEchartsModule, NgxChartsModule],
 })
-export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDestroy {
-
+export class ECommerceVisitorsStatisticsComponent
+  implements AfterViewInit, OnDestroy
+{
   private alive = true;
 
-  @Input() value: number;
+  @Input() value!: number;
 
-  option: any = {};
-  chartLegend: { iconColor: string; title: string }[];
-  echartsIntance: any;
+  option!: EChartsOption;
+  chartLegend: { iconColor: NgxLegendItemColor; title: string }[] = [];
+  echartsInstance!: ECharts;
 
-  constructor(private theme: NbThemeService,
-              private layoutService: LayoutService) {
-    this.layoutService.onSafeChangeLayoutSize()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
+  constructor(
+    private theme: NbThemeService,
+    private layoutService: LayoutService
+  ) {
+    this.layoutService
+      .onSafeChangeLayoutSize()
+      .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.resizeChart());
   }
 
   ngAfterViewInit() {
-    this.theme.getJsTheme()
+    this.theme
+      .getJsTheme()
       .pipe(
         takeWhile(() => this.alive),
-        delay(1),
+        delay(1)
       )
-      .subscribe(config => {
+      .subscribe((config) => {
         const variables: any = config.variables;
-        const visitorsPieLegend: any = config.variables.visitorsPieLegend;
+        const visitorsPieLegend: any = config.variables?.visitorsPieLegend;
 
-        this.setOptions(variables);
-        this.setLegendItems(visitorsPieLegend);
-    });
+        if (!this.echartsInstance) {
+          this.setOptions(variables);
+          this.setLegendItems(visitorsPieLegend);
+        }
+      });
   }
 
-  setLegendItems(visitorsPieLegend) {
+  setLegendItems(visitorsPieLegend: any) {
     this.chartLegend = [
       {
-        iconColor: visitorsPieLegend.firstSection,
-        title: 'New Visitors',
+        iconColor: visitorsPieLegend?.firstSection,
+        title: "New Visitors",
       },
       {
-        iconColor: visitorsPieLegend.secondSection,
-        title: 'Return Visitors',
+        iconColor: visitorsPieLegend?.secondSection,
+        title: "Return Visitors",
       },
     ];
   }
 
-  setOptions(variables) {
+  setOptions(variables: any) {
     const visitorsPie: any = variables.visitorsPie;
 
     this.option = {
       tooltip: {
-        trigger: 'item',
-        formatter: '',
+        trigger: "item",
+        formatter: "",
       },
       series: [
         {
-          name: ' ',
-          clockWise: true,
-          hoverAnimation: false,
-          type: 'pie',
-          center: ['50%', '50%'],
-          radius: visitorsPie.firstPieRadius,
+          name: " ",
+          clockwise: true,
+          emphasis: { scale: false },
+          type: "pie",
+          center: ["50%", "50%"],
+          radius: visitorsPie?.firstPieRadius,
           data: [
             {
               value: this.value,
-              name: ' ',
+              name: " ",
               label: {
-                normal: {
-                  position: 'center',
-                  formatter: '',
-                  textStyle: {
-                    fontSize: '22',
-                    fontFamily: variables.fontSecondary,
-                    fontWeight: '600',
-                    color: variables.fgHeading,
-                  },
-                },
-              },
-              tooltip: {
-                show: false,
+                position: "center",
+                formatter: "",
+                fontSize: 22,
+                fontFamily: variables.fontSecondary,
+                fontWeight: 600,
+                color: variables.fgHeading,
               },
               itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: visitorsPie.firstPieGradientLeft,
-                    },
-                    {
-                      offset: 1,
-                      color: visitorsPie.firstPieGradientRight,
-                    },
-                  ]),
-                  shadowColor: visitorsPie.firstPieShadowColor,
-                  shadowBlur: 0,
-                  shadowOffsetX: 0,
-                  shadowOffsetY: 3,
-                },
+                color: new graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: visitorsPie?.firstPieGradientLeft },
+                  { offset: 1, color: visitorsPie?.firstPieGradientRight },
+                ]),
+                shadowColor: visitorsPie?.firstPieShadowColor,
+                shadowBlur: 0,
+                shadowOffsetX: 0,
+                shadowOffsetY: 3,
               },
-              hoverAnimation: false,
             },
             {
               value: 100 - this.value,
-              name: ' ',
-              tooltip: {
-                show: false,
-              },
-              label: {
-                normal: {
-                  position: 'inner',
-                },
-              },
-              itemStyle: {
-                normal: {
-                  color: variables.layoutBg,
-                },
-              },
+              name: " ",
+              label: { position: "inner" },
+              itemStyle: { color: variables.layoutBg },
             },
           ],
         },
         {
-          name: ' ',
-          clockWise: true,
-          hoverAnimation: false,
-          type: 'pie',
-          center: ['50%', '50%'],
-          radius: visitorsPie.secondPieRadius,
+          name: " ",
+          clockwise: true,
+          emphasis: { scale: false },
+          type: "pie",
+          center: ["50%", "50%"],
+          radius: visitorsPie?.secondPieRadius,
           data: [
             {
               value: this.value,
-              name: ' ',
+              name: " ",
               label: {
-                normal: {
-                  position: 'center',
-                  formatter: '',
-                  textStyle: {
-                    fontSize: '22',
-                    fontFamily: variables.fontSecondary,
-                    fontWeight: '600',
-                    color: variables.fgHeading,
-                  },
-                },
+                position: "center",
+                formatter: "",
+                fontSize: 22,
+                fontFamily: variables.fontSecondary,
+                fontWeight: 600,
+                color: variables.fgHeading,
               },
-              tooltip: {
-                show: false,
-              },
-              itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1),
-                },
-              },
-              hoverAnimation: false,
+              itemStyle: { color: new graphic.LinearGradient(0, 0, 0, 1) },
             },
             {
               value: 100 - this.value,
-              name: ' ',
-              tooltip: {
-                show: false,
-              },
-              label: {
-                normal: {
-                  position: 'inner',
-                },
-              },
+              name: " ",
+              label: { position: "inner" },
               itemStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: visitorsPie.secondPieGradientLeft,
-                    },
-                    {
-                      offset: 1,
-                      color: visitorsPie.secondPieGradientRight,
-                    },
-                  ]),
-                  shadowColor: visitorsPie.secondPieShadowColor,
-                  shadowBlur: 0,
-                  shadowOffsetX: visitorsPie.shadowOffsetX,
-                  shadowOffsetY: visitorsPie.shadowOffsetY,
-                },
+                color: new graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: visitorsPie?.secondPieGradientLeft },
+                  { offset: 1, color: visitorsPie?.secondPieGradientRight },
+                ]),
+                shadowColor: visitorsPie?.secondPieShadowColor,
+                shadowBlur: 0,
+                shadowOffsetX: visitorsPie?.shadowOffsetX,
+                shadowOffsetY: visitorsPie?.shadowOffsetY,
               },
             },
           ],
@@ -200,13 +156,13 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
     };
   }
 
-  onChartInit(echarts) {
-    this.echartsIntance = echarts;
+  onChartInit(echarts: ECharts) {
+    this.echartsInstance = echarts;
   }
 
   resizeChart() {
-    if (this.echartsIntance) {
-      this.echartsIntance.resize();
+    if (this.echartsInstance) {
+      this.echartsInstance.resize();
     }
   }
 

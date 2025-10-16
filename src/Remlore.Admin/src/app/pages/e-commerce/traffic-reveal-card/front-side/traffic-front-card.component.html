@@ -1,12 +1,21 @@
 <nb-list>
-  <nb-list-item class="item" *ngFor="let item of frontCardData; trackBy: trackByDate">
+  @for (item of frontCardData; track item.date) {
+  <nb-list-item class="item">
     <span>{{ item.date }}</span>
     <span>{{ item.value }}</span>
-    <span class="delta" [class.up]="item.delta.up" [class.down]="!item.delta.up">
-      <nb-icon [icon]="item.delta.up ? 'arrow-up' : 'arrow-down'" pack="eva"></nb-icon>
+
+    @if (item.delta) {
+    <span class="delta" [ngClass]="item.delta.up ? 'up' : 'down'">
+      <nb-icon
+        [icon]="item.delta.up ? 'arrow-up' : 'arrow-down'"
+        pack="eva"
+      ></nb-icon>
       {{ item.delta.value }}%
     </span>
-    <ngx-traffic-bar [barData]="item.comparison" [successDelta]="item.delta.up">
-    </ngx-traffic-bar>
+
+    <rl-traffic-bar [barData]="item.comparison" [successDelta]="item.delta.up">
+    </rl-traffic-bar>
+    }
   </nb-list-item>
+  }
 </nb-list>

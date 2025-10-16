@@ -1,4 +1,4 @@
-@import '../../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
 
 @include nb-install-component() {
   display: flex;
@@ -19,7 +19,7 @@
     overflow: hidden;
   }
 
-  ngx-stats-bar-animation-chart {
+  rl-stats-bar-animation-chart {
     position: relative;
 
     ::ng-deep .echart {

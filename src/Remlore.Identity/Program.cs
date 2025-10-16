@@ -56,6 +56,14 @@ builder.Services.AddOpenIddict()
 
                     options.AllowRefreshTokenFlow();
 
+                    options
+                    .SetAccessTokenLifetime(TimeSpan.FromMinutes(30))
+                    .SetRefreshTokenLifetime(TimeSpan.FromDays(14))
+                    .SetAuthorizationCodeLifetime(TimeSpan.FromMinutes(5)) // Auth codes expire in 5 minutes
+                    // ADD THIS - Enable refresh token rotation for better security
+                    .SetRefreshTokenReuseLeeway(TimeSpan.Zero); // Disable reuse (recommended)
+
+
                     options.RegisterScopes(
                         Scopes.Email,
                         Scopes.Profile,
@@ -154,6 +162,8 @@ builder.Services.AddCors(options =>
                 "https://localhost:5000",
                 "https://localhost:5001",
                 "https://localhost:5002",
+                "http://localhost:4200",
+                "http://localhost:3000",
                 "https://localhost:44338"
             )
             .AllowAnyHeader()

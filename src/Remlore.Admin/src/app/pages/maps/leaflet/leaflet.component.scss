@@ -1,12 +1,13 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
-
   nb-card-body {
     padding: 0;
   }
 
-  ::ng-deep .leaflet-top, ::ng-deep .leaflet-bottom {
+  ::ng-deep .leaflet-top,
+  ::ng-deep .leaflet-bottom {
     z-index: 997;
   }
 

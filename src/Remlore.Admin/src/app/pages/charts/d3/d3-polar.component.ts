@@ -1,9 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { Component, OnDestroy } from "@angular/core";
+import { NbThemeService } from "@nebular/theme";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @Component({
-    selector: 'ngx-d3-polar',
-    template: `
+  selector: "rl-d3-polar",
+  template: `
     <ngx-charts-polar-chart
       [scheme]="colorScheme"
       [results]="multi"
@@ -14,60 +15,61 @@ import { NbThemeService } from '@nebular/theme';
       [showYAxisLabel]="showYAxisLabel"
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
-      [autoScale]="autoScale">
+      [autoScale]="autoScale"
+    >
     </ngx-charts-polar-chart>
   `,
-    standalone: false
+  imports: [NgxChartsModule],
 })
 export class D3PolarComponent implements OnDestroy {
   multi = [
     {
-      name: 'Germany',
+      name: "Germany",
       series: [
         {
-          name: '1990',
+          name: "1990",
           value: 31476,
         },
         {
-          name: '2000',
+          name: "2000",
           value: 36953,
         },
         {
-          name: '2010',
+          name: "2010",
           value: 40632,
         },
       ],
     },
     {
-      name: 'USA',
+      name: "USA",
       series: [
         {
-          name: '1990',
+          name: "1990",
           value: 37060,
         },
         {
-          name: '2000',
+          name: "2000",
           value: 45986,
         },
         {
-          name: '2010',
+          name: "2010",
           value: 49737,
         },
       ],
     },
     {
-      name: 'France',
+      name: "France",
       series: [
         {
-          name: '1990',
+          name: "1990",
           value: 29476,
         },
         {
-          name: '2000',
+          name: "2000",
           value: 34774,
         },
         {
-          name: '2010',
+          name: "2010",
           value: 36240,
         },
       ],
@@ -79,16 +81,22 @@ export class D3PolarComponent implements OnDestroy {
   showYAxis = true;
   showXAxisLabel = true;
   showYAxisLabel = true;
-  xAxisLabel = 'Country';
-  yAxisLabel = 'Population';
+  xAxisLabel = "Country";
+  yAxisLabel = "Population";
   colorScheme: any;
   themeSubscription: any;
 
   constructor(private theme: NbThemeService) {
-    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+    this.themeSubscription = this.theme.getJsTheme().subscribe((config) => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [
+          colors.primaryLight,
+          colors.infoLight,
+          colors.successLight,
+          colors.warningLight,
+          colors.dangerLight,
+        ],
       };
     });
   }

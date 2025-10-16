@@ -1,6 +1,5 @@
-@import '../../../@theme/styles/themes';
-
 $shadow-green: #00977e;
+@use "@nebular/theme/styles/theming" as *;
 
 @include nb-install-component() {
   .progress-info {

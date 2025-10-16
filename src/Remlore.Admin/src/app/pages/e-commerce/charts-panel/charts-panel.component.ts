@@ -1,32 +1,47 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
+import { Component, OnDestroy, ViewChild } from "@angular/core";
+import { takeWhile } from "rxjs/operators";
 
-import { OrdersChartComponent } from './charts/orders-chart.component';
-import { ProfitChartComponent } from './charts/profit-chart.component';
-import { OrdersChart } from '../../../@core/data/orders-chart';
-import { ProfitChart } from '../../../@core/data/profit-chart';
-import { OrderProfitChartSummary, OrdersProfitChartData } from '../../../@core/data/orders-profit-chart';
+import { NbCardModule, NbTabsetModule } from "@nebular/theme";
+import { OrdersChart } from "@remlore/core/data/orders-chart";
+import {
+  OrderProfitChartSummary,
+  OrdersProfitChartData,
+} from "@remlore/core/data/orders-profit-chart";
+import { ProfitChart } from "@remlore/core/data/profit-chart";
+import { ChartPanelHeaderComponent } from "./chart-panel-header/chart-panel-header.component";
+import { ChartPanelSummaryComponent } from "./chart-panel-summary/chart-panel-summary.component";
+import { OrdersChartComponent } from "./charts/orders-chart.component";
+import { ProfitChartComponent } from "./charts/profit-chart.component";
 
 @Component({
-    selector: 'ngx-ecommerce-charts',
-    styleUrls: ['./charts-panel.component.scss'],
-    templateUrl: './charts-panel.component.html',
-    standalone: false
+  selector: "rl-ecommerce-charts",
+  styleUrls: ["./charts-panel.component.scss"],
+  templateUrl: "./charts-panel.component.html",
+  imports: [
+    NbCardModule,
+    NbTabsetModule,
+    ChartPanelSummaryComponent,
+    OrdersChartComponent,
+    ChartPanelHeaderComponent,
+    ProfitChartComponent,
+  ],
 })
 export class ECommerceChartsPanelComponent implements OnDestroy {
-
   private alive = true;
 
-  chartPanelSummary: OrderProfitChartSummary[];
-  period: string = 'week';
-  ordersChartData: OrdersChart;
-  profitChartData: ProfitChart;
+  chartPanelSummary: OrderProfitChartSummary[] = [];
+  period: string = "week";
+  ordersChartData!: OrdersChart;
+  profitChartData!: ProfitChart;
 
-  @ViewChild('ordersChart', { static: true }) ordersChart: OrdersChartComponent;
-  @ViewChild('profitChart', { static: true }) profitChart: ProfitChartComponent;
+  @ViewChild("ordersChart", { static: true })
+  ordersChart!: OrdersChartComponent;
+  @ViewChild("profitChart", { static: true })
+  profitChart!: ProfitChartComponent;
 
   constructor(private ordersProfitChartService: OrdersProfitChartData) {
-    this.ordersProfitChartService.getOrderProfitChartSummary()
+    this.ordersProfitChartService
+      .getOrderProfitChartSummary()
       .pipe(takeWhile(() => this.alive))
       .subscribe((summary) => {
         this.chartPanelSummary = summary;
@@ -45,8 +60,8 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
     this.getProfitChartData(value);
   }
 
-  changeTab(selectedTab) {
-    if (selectedTab.tabTitle === 'Profit') {
+  changeTab(selectedTab: any) {
+    if (selectedTab.tabTitle === "Profit") {
       this.profitChart.resizeChart();
     } else {
       this.ordersChart.resizeChart();
@@ -54,17 +69,19 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
   }
 
   getOrdersChartData(period: string) {
-    this.ordersProfitChartService.getOrdersChartData(period)
+    this.ordersProfitChartService
+      .getOrdersChartData(period)
       .pipe(takeWhile(() => this.alive))
-      .subscribe(ordersChartData => {
+      .subscribe((ordersChartData) => {
         this.ordersChartData = ordersChartData;
       });
   }
 
   getProfitChartData(period: string) {
-    this.ordersProfitChartService.getProfitChartData(period)
+    this.ordersProfitChartService
+      .getProfitChartData(period)
       .pipe(takeWhile(() => this.alive))
-      .subscribe(profitChartData => {
+      .subscribe((profitChartData) => {
         this.profitChartData = profitChartData;
       });
   }

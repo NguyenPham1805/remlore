@@ -1,34 +1,49 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+} from "@angular/core";
+import { NbThemeService } from "@nebular/theme";
+import { takeWhile } from "rxjs/operators";
 
-import { ProfitChart } from '../../../../@core/data/profit-chart';
-import { LayoutService } from '../../../../@core/utils/layout.service';
+import { ProfitChart } from "@remlore/core/data/profit-chart";
+import { LayoutService } from "@remlore/core/utils/layout.service";
+import { graphic } from "echarts";
+import { NgxEchartsModule } from "ngx-echarts";
 
 @Component({
-    selector: 'ngx-profit-chart',
-    styleUrls: ['./charts-common.component.scss'],
-    template: `
-    <div echarts [options]="options" class="echart" (chartInit)="onChartInit($event)"></div>
+  selector: "rl-profit-chart",
+  styleUrls: ["./charts-common.component.scss"],
+  template: `
+    <div
+      echarts
+      [options]="options"
+      class="echart"
+      (chartInit)="onChartInit($event)"
+    ></div>
   `,
-    standalone: false
+  imports: [NgxEchartsModule],
 })
-export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges {
-
+export class ProfitChartComponent
+  implements AfterViewInit, OnDestroy, OnChanges
+{
   @Input()
-  profitChartData: ProfitChart;
+  profitChartData!: ProfitChart;
 
   private alive = true;
 
   echartsIntance: any;
   options: any = {};
 
-  constructor(private theme: NbThemeService,
-              private layoutService: LayoutService) {
-    this.layoutService.onSafeChangeLayoutSize()
-      .pipe(
-        takeWhile(() => this.alive),
-      )
+  constructor(
+    private theme: NbThemeService,
+    private layoutService: LayoutService
+  ) {
+    this.layoutService
+      .onSafeChangeLayoutSize()
+      .pipe(takeWhile(() => this.alive))
       .subscribe(() => this.resizeChart());
   }
 
@@ -39,120 +54,124 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
   }
 
   ngAfterViewInit() {
-    this.theme.getJsTheme()
+    this.theme
+      .getJsTheme()
       .pipe(takeWhile(() => this.alive))
-      .subscribe(config => {
-        const eTheme: any = config.variables.profit;
+      .subscribe((config) => {
+        const eTheme: any = config.variables?.profit;
 
         this.setOptions(eTheme);
       });
   }
 
-  setOptions(eTheme) {
+  setOptions(eTheme: any) {
     this.options = {
-      backgroundColor: eTheme.bg,
+      backgroundColor: eTheme?.bg,
       tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
         axisPointer: {
-          type: 'shadow',
+          type: "shadow",
           shadowStyle: {
-            color: 'rgba(0, 0, 0, 0.3)',
+            color: "rgba(0, 0, 0, 0.3)",
           },
         },
       },
       grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
+        left: "3%",
+        right: "4%",
+        bottom: "3%",
         containLabel: true,
       },
       xAxis: [
         {
-          type: 'category',
+          type: "category",
           data: this.profitChartData.chartLabel,
           axisTick: {
             alignWithLabel: true,
           },
           axisLine: {
             lineStyle: {
-              color: eTheme.axisLineColor,
+              color: eTheme?.axisLineColor,
             },
           },
           axisLabel: {
-            color: eTheme.axisTextColor,
-            fontSize: eTheme.axisFontSize,
+            color: eTheme?.axisTextColor,
+            fontSize: eTheme?.axisFontSize,
           },
         },
       ],
       yAxis: [
         {
-          type: 'value',
+          type: "value",
           axisLine: {
             lineStyle: {
-              color: eTheme.axisLineColor,
+              color: eTheme?.axisLineColor,
             },
           },
           splitLine: {
             lineStyle: {
-              color: eTheme.splitLineColor,
+              color: eTheme?.splitLineColor,
             },
           },
           axisLabel: {
-            color: eTheme.axisTextColor,
-            fontSize: eTheme.axisFontSize,
+            color: eTheme?.axisTextColor,
+            fontSize: eTheme?.axisFontSize,
           },
         },
       ],
       series: [
         {
-          name: 'Canceled',
-          type: 'bar',
+          name: "Canceled",
+          type: "bar",
           barGap: 0,
-          barWidth: '20%',
+          barWidth: "20%",
           itemStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            color: new graphic.LinearGradient(0, 0, 0, 1, [
+              {
                 offset: 0,
-                color: eTheme.firstLineGradFrom,
-              }, {
+                color: eTheme?.firstLineGradFrom,
+              },
+              {
                 offset: 1,
-                color: eTheme.firstLineGradTo,
-              }]),
-            },
+                color: eTheme?.firstLineGradTo,
+              },
+            ]),
           },
           data: this.profitChartData.data[0],
         },
         {
-          name: 'Payment',
-          type: 'bar',
-          barWidth: '20%',
+          name: "Payment",
+          type: "bar",
+          barWidth: "20%",
           itemStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            color: new graphic.LinearGradient(0, 0, 0, 1, [
+              {
                 offset: 0,
-                color: eTheme.secondLineGradFrom,
-              }, {
+                color: eTheme?.secondLineGradFrom,
+              },
+              {
                 offset: 1,
-                color: eTheme.secondLineGradTo,
-              }]),
-            },
+                color: eTheme?.secondLineGradTo,
+              },
+            ]),
           },
           data: this.profitChartData.data[1],
         },
         {
-          name: 'All orders',
-          type: 'bar',
-          barWidth: '20%',
+          name: "All orders",
+          type: "bar",
+          barWidth: "20%",
           itemStyle: {
-            normal: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+            color: new graphic.LinearGradient(0, 0, 0, 1, [
+              {
                 offset: 0,
-                color: eTheme.thirdLineGradFrom,
-              }, {
+                color: eTheme?.thirdLineGradFrom,
+              },
+              {
                 offset: 1,
-                color: eTheme.thirdLineGradTo,
-              }]),
-            },
+                color: eTheme?.thirdLineGradTo,
+              },
+            ]),
           },
           data: this.profitChartData.data[2],
         },
@@ -172,7 +191,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
     });
   }
 
-  getNewSeries(series, data: number[][]) {
+  getNewSeries(series: any[], data: number[][]) {
     return series.map((line, index) => {
       return {
         ...line,
@@ -181,7 +200,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
     });
   }
 
-  onChartInit(echarts) {
+  onChartInit(echarts: any) {
     this.echartsIntance = echarts;
   }
 

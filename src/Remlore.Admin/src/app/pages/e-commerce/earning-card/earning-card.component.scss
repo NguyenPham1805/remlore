@@ -1,4 +1,5 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
   nb-card {
@@ -28,8 +29,8 @@
     }
   }
 
-  ngx-earning-card-back,
-  ngx-earning-card-front {
+  rl-earning-card-back,
+  rl-earning-card-front {
     display: flex;
     flex-direction: column;
     flex: 1;

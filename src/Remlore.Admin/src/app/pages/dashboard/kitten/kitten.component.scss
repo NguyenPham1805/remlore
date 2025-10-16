@@ -1,7 +1,7 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
-
   .picture {
     background-position: center;
     background-size: cover;

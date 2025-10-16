@@ -1,28 +1,27 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { Component, OnDestroy } from "@angular/core";
+import { NbThemeService } from "@nebular/theme";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @Component({
-    selector: 'ngx-d3-advanced-pie',
-    template: `
-    <ngx-charts-advanced-pie-chart
-      [scheme]="colorScheme"
-      [results]="single">
+  selector: "rl-d3-advanced-pie",
+  template: `
+    <ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="single">
     </ngx-charts-advanced-pie-chart>
   `,
-    standalone: false
+  imports: [NgxChartsModule],
 })
 export class D3AdvancedPieComponent implements OnDestroy {
   single = [
     {
-      name: 'Germany',
+      name: "Germany",
       value: 8940000,
     },
     {
-      name: 'USA',
+      name: "USA",
       value: 5000000,
     },
     {
-      name: 'France',
+      name: "France",
       value: 7200000,
     },
   ];
@@ -30,10 +29,16 @@ export class D3AdvancedPieComponent implements OnDestroy {
   themeSubscription: any;
 
   constructor(private theme: NbThemeService) {
-    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+    this.themeSubscription = this.theme.getJsTheme().subscribe((config) => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [
+          colors.primaryLight,
+          colors.infoLight,
+          colors.successLight,
+          colors.warningLight,
+          colors.dangerLight,
+        ],
       };
     });
   }

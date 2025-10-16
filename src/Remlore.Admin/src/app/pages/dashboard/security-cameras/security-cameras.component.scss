@@ -1,9 +1,8 @@
-@import '../../../@theme/styles/themes';
-@import '@nebular/theme/styles/global/breakpoints';
-@import 'bootstrap/scss/mixins/breakpoints';
+@use "@nebular/theme/styles/theming" as *;
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "themes" as *;
 
 @include nb-install-component() {
-
   nb-card-header {
     display: flex;
     align-items: center;
@@ -13,7 +12,7 @@
 
   .single-view-button {
     .nb-square {
-      font-size: 1.25rem;
+      font-size: 1rem;
     }
 
     @include nb-ltr {
@@ -72,9 +71,13 @@
     background-size: cover;
     position: relative;
 
+    &:not(.single) {
+      cursor: pointer;
+    }
+
     &::before {
       background-color: rgba(255, 255, 255, 0.1);
-      content: '';
+      content: "";
       position: absolute;
       width: 100%;
       height: 100%;
@@ -96,6 +99,9 @@
   }
 
   nb-action {
+    cursor: pointer;
+    border-radius: 2px;
+
     nb-icon {
       @include nb-ltr(margin-right, 0.5rem);
       @include nb-rtl(margin-left, 0.5rem);
@@ -106,7 +112,7 @@
     }
   }
 
-  @include media-breakpoint-down(xl) {
+  @include nebular-breakpoints.media-breakpoint-down(xl) {
     nb-action {
       padding: 0;
     }

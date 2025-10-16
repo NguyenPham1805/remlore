@@ -1,7 +1,6 @@
-@import '../../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
 
 @include nb-install-component() {
-
   .visitors-statistics {
     width: 100%;
   }

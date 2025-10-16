@@ -1,7 +1,5 @@
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
-
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
 
 @include nb-install-component() {
   nb-card-body {
@@ -28,13 +26,13 @@
     }
   }
 
-  @include media-breakpoint-down(lg) {
+  @include nebular-breakpoints.media-breakpoint-down(lg) {
     button {
       padding: 0.8rem;
     }
   }
 
-  @include media-breakpoint-down(is) {
+  @include nebular-breakpoints.media-breakpoint-down(is) {
     button {
       padding: 0.75rem;
     }

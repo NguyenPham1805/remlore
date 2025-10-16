@@ -1,6 +1,5 @@
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
 
 @include nb-install-component() {
   .calendars {
@@ -19,13 +18,13 @@
     margin-bottom: 0.5rem;
   }
 
-  @include media-breakpoint-up(md) {
+  @include nebular-breakpoints.media-breakpoint-up(md) {
     .calendars {
       justify-content: flex-start;
     }
   }
 
-  @include media-breakpoint-up(lg) {
+  @include nebular-breakpoints.media-breakpoint-up(lg) {
     .calendars {
       margin: -1.1rem;
     }
@@ -34,7 +33,7 @@
     }
   }
 
-  @include media-breakpoint-up(xxxl) {
+  @include nebular-breakpoints.media-breakpoint-up(xxxl) {
     .calendars {
       margin: -1rem;
     }

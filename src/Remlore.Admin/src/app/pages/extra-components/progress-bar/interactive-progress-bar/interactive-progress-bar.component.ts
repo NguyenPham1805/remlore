@@ -1,24 +1,29 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import {
+  NbButtonModule,
+  NbCardModule,
+  NbIconModule,
+  NbProgressBarModule,
+} from "@nebular/theme";
 
 @Component({
-    selector: 'ngx-interactive-progress-bar',
-    templateUrl: 'interactive-progress-bar.component.html',
-    styleUrls: ['interactive-progress-bar.component.scss'],
-    standalone: false
+  selector: "rl-interactive-progress-bar",
+  templateUrl: "interactive-progress-bar.component.html",
+  styleUrls: ["interactive-progress-bar.component.scss"],
+  imports: [NbCardModule, NbButtonModule, NbIconModule, NbProgressBarModule],
 })
 export class InteractiveProgressBarComponent {
-
   value = 25;
 
   get status() {
     if (this.value <= 25) {
-      return 'danger';
+      return "danger";
     } else if (this.value <= 50) {
-      return 'warning';
+      return "warning";
     } else if (this.value <= 75) {
-      return 'info';
+      return "info";
     } else {
-      return 'success';
+      return "success";
     }
   }
 

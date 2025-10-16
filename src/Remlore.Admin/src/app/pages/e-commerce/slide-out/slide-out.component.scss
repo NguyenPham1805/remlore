@@ -1,6 +1,6 @@
-@import '../../../@theme/styles/themes';
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
   $slide-out-container-width: 40%;
@@ -40,7 +40,7 @@
   }
 
   .slide-out-container::before {
-    content: '';
+    content: "";
     @include nb-ltr(right, 0);
     @include nb-rtl(left, 0);
     width: 100%;
@@ -75,7 +75,7 @@
     margin: 0;
   }
 
-  @include media-breakpoint-down(md) {
+  @include nebular-breakpoints.media-breakpoint-down(md) {
     $slide-out-container-width: 50%;
 
     .slide-out-container {
@@ -88,7 +88,7 @@
     }
   }
 
-  @include media-breakpoint-down(is) {
+  @include nebular-breakpoints.media-breakpoint-down(is) {
     $slide-out-container-width: 100%;
 
     .show-hide-toggle {

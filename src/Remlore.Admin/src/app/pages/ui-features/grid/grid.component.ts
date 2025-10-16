@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { NbCardModule } from "@nebular/theme";
 
 @Component({
-    selector: 'ngx-grid',
-    styleUrls: ['./grid.component.scss'],
-    templateUrl: './grid.component.html',
-    standalone: false
+  selector: "rl-grid",
+  styleUrls: ["./grid.component.scss"],
+  templateUrl: "./grid.component.html",
+  imports: [NbCardModule],
 })
-export class GridComponent {
-
-}
+export class GridComponent {}

@@ -1,5 +1,6 @@
-@import '../../../../@theme/styles/themes';
-@import '@nebular/theme/styles/global/typography/typography';
+@use "@nebular/theme/styles/global/typography/typography";
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
   display: flex;
@@ -43,7 +44,7 @@
     @include nb-rtl(right, auto);
   }
 
-  ngx-earning-live-update-chart {
+  rl-earning-live-update-chart {
     flex: 1;
     position: relative;
 

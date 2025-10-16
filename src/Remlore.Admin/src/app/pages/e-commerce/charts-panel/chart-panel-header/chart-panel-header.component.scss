@@ -1,6 +1,5 @@
-@import '../../../../@theme/styles/themes';
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
+@use "@nebular/theme/styles/theming" as *;
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
 
 @include nb-install-component() {
   padding: 1.5rem 4.5rem;
@@ -9,14 +8,14 @@
   align-items: center;
   margin: -1rem;
 
-  ngx-legend-chart,
+  rl-legend-chart,
   .period-select {
-    padding-top: 1rem;
-    @include nb-ltr(padding-left, 0.5rem);
-    @include nb-rtl(padding-right, 0.5rem);
+    margin-top: 1rem;
+    @include nb-ltr(margin-left, 0.5rem);
+    @include nb-rtl(margin-right, 0.5rem);
   }
 
-  @include media-breakpoint-up(md) {
+  @include nebular-breakpoints.media-breakpoint-up(md) {
     .period-select {
       @include nb-ltr(margin-left, auto);
       @include nb-rtl(margin-right, auto);

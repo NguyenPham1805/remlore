@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { NbAlertModule, NbCardModule } from "@nebular/theme";
 
 @Component({
-    selector: 'ngx-alert',
-    templateUrl: 'alert.component.html',
-    standalone: false
+  selector: "rl-alert",
+  templateUrl: "alert.component.html",
+  imports: [NbCardModule, NbAlertModule],
 })
-export class AlertComponent {
-
-}
+export class AlertComponent {}

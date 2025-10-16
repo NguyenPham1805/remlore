@@ -1,4 +1,4 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
 
 @include nb-install-component() {
   .buttons-row {
@@ -16,5 +16,10 @@
 
   .actions-card {
     height: 8rem;
+  }
+
+  nb-action {
+    border-radius: 2px;
+    cursor: pointer;
   }
 }

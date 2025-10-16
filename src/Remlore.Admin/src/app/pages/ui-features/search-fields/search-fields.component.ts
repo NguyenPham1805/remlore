@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { MatRipple } from "@angular/material/core";
+import { NbCardModule, NbSearchModule } from "@nebular/theme";
 
 @Component({
-    selector: 'ngx-search-fields',
-    templateUrl: 'search-fields.component.html',
-    standalone: false
+  selector: "rl-search-fields",
+  templateUrl: "search-fields.component.html",
+  imports: [NbCardModule, NbSearchModule, MatRipple],
 })
-export class SearchComponent {
-}
+export class SearchComponent {}

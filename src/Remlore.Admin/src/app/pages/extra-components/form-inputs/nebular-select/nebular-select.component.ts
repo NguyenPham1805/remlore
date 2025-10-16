@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { NbCardModule, NbSelectModule } from "@nebular/theme";
 
 @Component({
-    selector: 'ngx-nebular-select',
-    templateUrl: 'nebular-select.component.html',
-    styleUrls: ['nebular-select.component.scss'],
-    standalone: false
+  selector: "rl-nebular-select",
+  templateUrl: "nebular-select.component.html",
+  styleUrls: ["nebular-select.component.scss"],
+  imports: [NbCardModule, NbSelectModule],
 })
 export class NebularSelectComponent {
-
-  commonSelectedItem = '2';
-  selectedItem;
+  commonSelectedItem = "2";
+  selectedItem: string | null = null;
 }

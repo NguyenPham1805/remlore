@@ -1,0 +1,46 @@
+@forward "@nebular/theme/styles/theming";
+@use "@nebular/theme/styles/theming" as *;
+@use "@nebular/theme/styles/globals" as nebular;
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/auth/styles/globals" as *;
+@use "bootstrap/scss/bootstrap" as *;
+@use "nebular-icons/scss/nebular-icons" as *;
+
+// loading progress bar theme
+@use "./pace.theme" as *;
+
+// layout and overrides
+@use "./layout" as *;
+@use "./overrides" as *;
+@use "./variables" as *;
+
+// themes - our custom or/and out of the box themes
+@use "themes" as *;
+
+// material themes
+@use "./material/angular-material" as *;
+@use "./material/material-overrides" as *;
+
+// Google Fonts - this stays as @import since it's a CSS import, not a Sass import
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700,800&display=swap");
+
+// install the framework and custom global styles
+@include nb-install() {
+  @include angular-material();
+
+  // framework global styles
+  @include nebular.nb-theme-global();
+  @include nb-auth-global();
+
+  @include rl-layout();
+  // loading progress bar
+  @include rl-pace-theme();
+
+  @include nb-overrides();
+  @include material-overrides();
+}
+
+html.cdk-global-scrollblock {
+  top: 0 !important;
+}

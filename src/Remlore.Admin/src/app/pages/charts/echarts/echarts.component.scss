@@ -1,13 +1,14 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
-  ngx-echarts-pie,
-  ngx-echarts-bar,
-  ngx-echarts-line,
-  ngx-echarts-multiple-xaxis,
-  ngx-echarts-area-stack,
-  ngx-echarts-bar-animation,
-  ngx-echarts-radar {
+  rl-echarts-pie,
+  rl-echarts-bar,
+  rl-echarts-line,
+  rl-echarts-multiple-xaxis,
+  rl-echarts-area-stack,
+  rl-echarts-bar-animation,
+  rl-echarts-radar {
     display: block;
     height: nb-theme(card-height-medium);
     width: 100%;

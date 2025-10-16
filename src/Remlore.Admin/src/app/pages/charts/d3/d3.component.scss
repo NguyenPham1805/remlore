@@ -1,12 +1,13 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
-  ngx-d3-bar,
-  ngx-d3-pie,
-  ngx-d3-advanced-pie,
-  ngx-d3-area-stack,
-  ngx-d3-line,
-  ngx-d3-polar {
+  rl-d3-bar,
+  rl-d3-pie,
+  rl-d3-advanced-pie,
+  rl-d3-area-stack,
+  rl-d3-line,
+  rl-d3-polar {
     display: block;
     width: 100%;
     height: nb-theme(card-height-medium);

@@ -1,6 +1,6 @@
-@import '../../../../@theme/styles/themes';
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
   height: 100%;
@@ -242,14 +242,14 @@
         font-size: 1.3rem;
       }
 
-      @include media-breakpoint-down(is) {
+      @include nebular-breakpoints.media-breakpoint-down(is) {
         .play-button,
         .skip-forward-button {
           padding: 0.5rem;
         }
       }
 
-      @include media-breakpoint-down(xs) {
+      @include nebular-breakpoints.media-breakpoint-down(xs) {
         .skip-forward-button {
           display: none;
         }
@@ -261,7 +261,7 @@
     }
 
     .track-info .details {
-      @include media-breakpoint-down(is) {
+      @include nebular-breakpoints.media-breakpoint-down(is) {
         span {
           display: inline-block;
           overflow: hidden;
@@ -271,13 +271,13 @@
     }
   }
 
-  @include media-breakpoint-between(lg, lg) {
-    .controls {
-      padding: 0.5rem;
-    }
+  // @include nebular-theme-breakpoints.media-breakpoint-between(lg, lg) {
+  //   .controls {
+  //     padding: 0.5rem;
+  //   }
 
-    .control-button.size-medium {
-      padding: nb-theme(button-ghost-small-padding);
-    }
-  }
+  //   .control-button.size-medium {
+  //     padding: nb-theme(button-ghost-small-padding);
+  //   }
+  // }
 }

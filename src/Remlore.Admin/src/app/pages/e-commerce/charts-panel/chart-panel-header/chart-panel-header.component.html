@@ -1,7 +1,14 @@
-<ngx-legend-chart [legendItems]="chartLegend"></ngx-legend-chart>
+<rl-legend-chart [legendItems]="chartLegend"></rl-legend-chart>
 
-<nb-select class="period-select" [selected]="type" (selectedChange)="changePeriod($event)">
-  <nb-option *ngFor="let period of types" [value]="period">
+<nb-select
+  class="period-select"
+  matRipple
+  [selected]="type"
+  (selectedChange)="changePeriod($event)"
+>
+  @for (period of types; track $index) {
+  <nb-option matRipple [value]="period">
     {{ period }}
   </nb-option>
+  }
 </nb-select>

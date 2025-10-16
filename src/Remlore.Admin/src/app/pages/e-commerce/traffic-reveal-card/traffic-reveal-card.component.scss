@@ -1,4 +1,5 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
   .toggle-icon {
@@ -8,5 +9,12 @@
     @include nb-rtl(right, auto);
     @include nb-rtl(left, 1.25rem);
     cursor: pointer;
+  }
+
+  nb-card-header {
+    padding-top: nb-theme(card-header-with-select-padding-top);
+    padding-bottom: nb-theme(card-header-with-select-padding-bottom);
+    @include nb-ltr(padding-right, 4rem);
+    @include nb-rtl(padding-left, 4rem);
   }
 }

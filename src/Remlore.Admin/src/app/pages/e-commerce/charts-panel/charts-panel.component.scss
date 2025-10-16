@@ -1,10 +1,13 @@
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
 
 $legend-all-orders-color: #00977e;
 $legend-payment-color: #6935ca;
 $legend-canceled-color: #3f4fda;
 
 @include nb-install-component() {
+  nb-card {
+    overflow: hidden;
+  }
 
   nb-tabset {
     display: flex;
@@ -34,8 +37,8 @@ $legend-canceled-color: #3f4fda;
     overflow: hidden;
   }
 
-  ngx-profit-chart,
-  ngx-orders-chart {
+  rl-profit-chart,
+  rl-orders-chart {
     padding: 0 1.25rem;
   }
 }

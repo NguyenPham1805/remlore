@@ -1,0 +1,11 @@
+@use "sass:map";
+@use "bootstrap/scss/mixins/breakpoints" as bootstrap-breakpoints;
+
+// Custom media breakpoint mixin that combines Bootstrap and Nebular
+@mixin media-breakpoint-down($breakpoint) {
+  @if map.has-key(bootstrap-breakpoints.$grid-breakpoints, $breakpoint) {
+    @media (max-width: map.get(bootstrap-breakpoints.$grid-breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}

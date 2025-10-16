@@ -145,30 +145,32 @@ namespace Remlore.Identity.Services
                 }, cancellationToken);
             }
 
-            if (await manager.FindByClientIdAsync("remlore_admin_app", cancellationToken) == null)
+            if (await manager.FindByClientIdAsync("remlore_admin", cancellationToken) == null)
             {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
-                    ClientId = "remlore_admin_app",
-                    ClientSecret = "remlore_admin_app_super_secret",
+                    ClientId = "remlore_admin",
+                    // No ClientSecret for public clients
+                    ClientType = ClientTypes.Public,
                     DisplayName = "Remlore Admin App",
-                    RedirectUris = { new Uri("https://localhost:4200/auth/callback") },
-                    PostLogoutRedirectUris = { new Uri("https://localhost:4200/") },
+                    RedirectUris = { new Uri("http://localhost:4200/auth/callback") },
+                    PostLogoutRedirectUris = { new Uri("http://localhost:4200/") },
                     Permissions =
                     {
                         Permissions.Endpoints.Authorization,
                         Permissions.Endpoints.Token,
                         Permissions.GrantTypes.AuthorizationCode,
+                        Permissions.GrantTypes.RefreshToken,
                         Permissions.ResponseTypes.Code,
-                        // Allow SPA to request these scopes:
-                        Permissions.Scopes.Email,
+                        Permissions.Prefixes.Scope + Scopes.Email,
                         Permissions.Prefixes.Scope + Scopes.OpenId,
                         Permissions.Prefixes.Scope + Scopes.Profile,
-                        Permissions.Prefixes.Scope + "ids_admin_api" // Allow this client to request ids_admin_api scope
+                        Permissions.Prefixes.Scope + Scopes.OfflineAccess,
+                        Permissions.Prefixes.Scope + "ids_admin_api"
                     },
                     Requirements =
                     {
-                        Requirements.Features.ProofKeyForCodeExchange // PKCE required
+                        Requirements.Features.ProofKeyForCodeExchange
                     }
                 }, cancellationToken);
             }
@@ -180,7 +182,7 @@ namespace Remlore.Identity.Services
                     ClientId = "remlore_forum",
                     ClientSecret = "remlore_forum_super_secret",
                     DisplayName = "Remlore Forum App",
-                    RedirectUris = { new Uri("https://localhost:3000/auth/callback") },
+                    RedirectUris = { new Uri("http://localhost:3000/auth/callback") },
                     Permissions =
                     {
                         Permissions.Endpoints.Token,

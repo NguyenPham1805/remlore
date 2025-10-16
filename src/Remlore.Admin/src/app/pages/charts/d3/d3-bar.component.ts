@@ -1,9 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { Component, OnDestroy } from "@angular/core";
+import { NbThemeService } from "@nebular/theme";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @Component({
-    selector: 'ngx-d3-bar',
-    template: `
+  selector: "rl-d3-bar",
+  template: `
     <ngx-charts-bar-vertical
       [scheme]="colorScheme"
       [results]="results"
@@ -11,31 +12,37 @@ import { NbThemeService } from '@nebular/theme';
       [yAxis]="showYAxis"
       [legend]="showLegend"
       [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel">
+      [yAxisLabel]="yAxisLabel"
+    >
     </ngx-charts-bar-vertical>
   `,
-    standalone: false
+  imports: [NgxChartsModule],
 })
 export class D3BarComponent implements OnDestroy {
-
   results = [
-    { name: 'Germany', value: 8940 },
-    { name: 'USA', value: 5000 },
-    { name: 'France', value: 7200 },
+    { name: "Germany", value: 8940 },
+    { name: "USA", value: 5000 },
+    { name: "France", value: 7200 },
   ];
   showLegend = true;
   showXAxis = true;
   showYAxis = true;
-  xAxisLabel = 'Country';
-  yAxisLabel = 'Population';
+  xAxisLabel = "Country";
+  yAxisLabel = "Population";
   colorScheme: any;
   themeSubscription: any;
 
   constructor(private theme: NbThemeService) {
-    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+    this.themeSubscription = this.theme.getJsTheme().subscribe((config) => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [
+          colors.primaryLight,
+          colors.infoLight,
+          colors.successLight,
+          colors.warningLight,
+          colors.dangerLight,
+        ],
       };
     });
   }

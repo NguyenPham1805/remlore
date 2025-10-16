@@ -5,13 +5,17 @@
       <nb-list
         nbInfiniteList
         [threshold]="500"
-        (bottomThreshold)="loadNext(firstCard)">
-        <nb-list-item *ngFor="let newsPost of firstCard.news">
-          <ngx-news-post [post]="newsPost"></ngx-news-post>
+        (bottomThreshold)="loadNext(firstCard)"
+      >
+        @for (newsPost of firstCard.news; track newsPost) {
+        <nb-list-item>
+          <rl-news-post [post]="newsPost"></rl-news-post>
         </nb-list-item>
-        <nb-list-item *ngFor="let _ of firstCard.placeholders">
-          <ngx-news-post-placeholder></ngx-news-post-placeholder>
+        } @for (_ of firstCard.placeholders; track $index) {
+        <nb-list-item>
+          <rl-news-post-placeholder></rl-news-post-placeholder>
         </nb-list-item>
+        }
       </nb-list>
     </nb-card>
   </div>
@@ -23,13 +27,17 @@
         nbInfiniteList
         listenWindowScroll
         [threshold]="500"
-        (bottomThreshold)="loadNext(secondCard)">
-        <nb-list-item *ngFor="let newsPost of secondCard.news">
-          <ngx-news-post [post]="newsPost"></ngx-news-post>
+        (bottomThreshold)="loadNext(secondCard)"
+      >
+        @for (newsPost of secondCard.news; track newsPost) {
+        <nb-list-item>
+          <rl-news-post [post]="newsPost"></rl-news-post>
         </nb-list-item>
-        <nb-list-item *ngFor="let _ of secondCard.placeholders">
-          <ngx-news-post-placeholder></ngx-news-post-placeholder>
+        } @for (_ of secondCard.placeholders; track $index) {
+        <nb-list-item>
+          <rl-news-post-placeholder></rl-news-post-placeholder>
         </nb-list-item>
+        }
       </nb-list>
     </nb-card>
   </div>

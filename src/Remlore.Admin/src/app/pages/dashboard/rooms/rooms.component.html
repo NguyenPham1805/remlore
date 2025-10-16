@@ -1,0 +1,17 @@
+<nb-card [size]="breakpoint.width >= breakpoints.sm ? 'giant' : ''">
+  <nb-icon
+    icon="arrow-ios-downward"
+    pack="eva"
+    (click)="collapse()"
+    class="collapse"
+    [hidden]="isCollapsed()"
+  >
+  </nb-icon>
+  <rl-room-selector
+    [class.dark-background]="isDarkTheme"
+    (selectEvent)="select($event)"
+  ></rl-room-selector>
+  <rl-player
+    [collapsed]="isCollapsed() && breakpoint.width <= breakpoints.md"
+  ></rl-player>
+</nb-card>

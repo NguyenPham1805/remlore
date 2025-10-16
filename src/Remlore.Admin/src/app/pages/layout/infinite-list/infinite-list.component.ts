@@ -1,15 +1,22 @@
-import { Component } from '@angular/core';
-import { NewsService } from '../news.service';
+import { Component } from "@angular/core";
+import { NbCardModule, NbListModule } from "@nebular/theme";
+import { NewsService } from "../news.service";
+import { NewsPostPlaceholderComponent } from "./news-post-placeholder/news-post-placeholder.component";
+import { NewsPostComponent } from "./news-post/news-post.component";
 
 @Component({
-    selector: 'ngx-infinite-list',
-    templateUrl: 'infinite-list.component.html',
-    styleUrls: ['infinite-list.component.scss'],
-    standalone: false
+  selector: "rl-infinite-list",
+  templateUrl: "infinite-list.component.html",
+  styleUrls: ["infinite-list.component.scss"],
+  imports: [
+    NewsPostComponent,
+    NewsPostPlaceholderComponent,
+    NbCardModule,
+    NbListModule,
+  ],
+  providers: [NewsService],
 })
 export class InfiniteListComponent {
-
-
   firstCard = {
     news: [],
     placeholders: [],
@@ -26,13 +33,16 @@ export class InfiniteListComponent {
 
   constructor(private newsService: NewsService) {}
 
-  loadNext(cardData) {
-    if (cardData.loading) { return; }
+  loadNext(cardData: any) {
+    if (cardData.loading) {
+      return;
+    }
 
     cardData.loading = true;
     cardData.placeholders = new Array(this.pageSize);
-    this.newsService.load(cardData.pageToLoadNext, this.pageSize)
-      .subscribe(nextNews => {
+    this.newsService
+      .load(cardData.pageToLoadNext, this.pageSize)
+      .subscribe((nextNews) => {
         cardData.placeholders = [];
         cardData.news.push(...nextNews);
         cardData.loading = false;

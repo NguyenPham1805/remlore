@@ -6,13 +6,15 @@
   <nb-card-body>
     <div class="chart-container">
       <div class="chart-header">
-        <ngx-legend-chart [legendItems]="chartLegend"></ngx-legend-chart>
+        <rl-legend-chart [legendItems]="chartLegend"></rl-legend-chart>
       </div>
-      <ngx-visitors-analytics-chart [chartData]="visitorsAnalyticsData"></ngx-visitors-analytics-chart>
+      <rl-visitors-analytics-chart
+        [chartData]="visitorsAnalyticsData"
+      ></rl-visitors-analytics-chart>
     </div>
   </nb-card-body>
 
-  <ngx-slide-out [showVisitorsStatistics]="true">
-    <ngx-visitors-statistics [value]="pieChartValue"></ngx-visitors-statistics>
-  </ngx-slide-out>
+  <rl-slide-out [showVisitorsStatistics]="true">
+    <rl-visitors-statistics [value]="pieChartValue"></rl-visitors-statistics>
+  </rl-slide-out>
 </nb-card>

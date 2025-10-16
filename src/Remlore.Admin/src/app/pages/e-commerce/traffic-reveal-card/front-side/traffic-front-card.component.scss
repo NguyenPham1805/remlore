@@ -1,9 +1,13 @@
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
-@import '../../../../@theme/styles/themes';
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
-  overflow: auto;
+  overflow: hidden;
+
+  nb-list {
+    height: 100%;
+  }
 
   .item {
     display: flex;
@@ -32,8 +36,8 @@
     }
   }
 
-  @include media-breakpoint-down(is) {
-    ngx-traffic-bar {
+  @include nebular-breakpoints.media-breakpoint-down(is) {
+    rl-traffic-bar {
       display: none;
     }
   }

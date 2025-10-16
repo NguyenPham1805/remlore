@@ -1,42 +1,44 @@
 <div class="row">
-  <div class="col-xxxl-3 col-md-6" *ngFor="let statusCard of statusCards">
-    <ngx-status-card [title]="statusCard.title" [type]="statusCard.type">
+  @for (statusCard of statusCards; track $index) {
+  <div class="col-xxxl-3 col-md-6">
+    <rl-status-card [title]="statusCard.title" [type]="statusCard.type">
       <i [ngClass]="statusCard.iconClass"></i>
-    </ngx-status-card>
+    </rl-status-card>
   </div>
+  }
 </div>
 
 <div class="row">
   <div class="col-xxxl-3 col-xxl-4 col-lg-5 col-md-6">
-    <ngx-temperature></ngx-temperature>
+    <rl-temperature></rl-temperature>
   </div>
 
   <div class="col-xxxl-9 col-xxl-8 col-lg-7 col-md-6">
-    <ngx-electricity></ngx-electricity>
+    <rl-electricity></rl-electricity>
   </div>
 </div>
 
 <div class="row">
   <div class="col-xxxl-9 col-xl-12">
-    <ngx-rooms></ngx-rooms>
+    <rl-rooms></rl-rooms>
   </div>
 
   <div class="col-xxxl-3 col-xxl-4 col-lg-7 col-md-6">
-    <ngx-contacts></ngx-contacts>
+    <rl-contacts></rl-contacts>
   </div>
 
   <div class="col-xxxl-3 col-xxl-4 col-lg-5 col-md-6">
-    <ngx-solar [chartValue]="solarValue"></ngx-solar>
+    <rl-solar [chartValue]="solarValue"></rl-solar>
 
-    <ngx-kitten></ngx-kitten>
+    <rl-kitten></rl-kitten>
   </div>
 
   <div class="col-xxxl-3 col-xxl-4 col-md-5">
-    <ngx-traffic></ngx-traffic>
-    <ngx-weather></ngx-weather>
+    <rl-traffic></rl-traffic>
+    <rl-weather></rl-weather>
   </div>
 
   <div class="col-xxxl-6 col-xxl-12 col-md-7">
-    <ngx-security-cameras></ngx-security-cameras>
+    <rl-security-cameras></rl-security-cameras>
   </div>
 </div>

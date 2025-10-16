@@ -1,4 +1,5 @@
-@import '../../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
   .summary-container {

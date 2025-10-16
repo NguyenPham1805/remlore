@@ -1,9 +1,8 @@
-@import '../../../@theme/styles/themes';
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
-
   .cards-container {
     display: flex;
     flex-direction: row;
@@ -82,7 +81,7 @@
     margin-left: auto;
   }
 
-  @include media-breakpoint-down(xl) {
+  @include nebular-breakpoints.media-breakpoint-down(xl) {
     .table-card {
       display: none;
     }

@@ -1,9 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { Component, OnDestroy } from "@angular/core";
+import { NbThemeService } from "@nebular/theme";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @Component({
-    selector: 'ngx-d3-area-stack',
-    template: `
+  selector: "rl-d3-area-stack",
+  template: `
     <ngx-charts-area-chart
       [scheme]="colorScheme"
       [results]="multi"
@@ -14,56 +15,76 @@ import { NbThemeService } from '@nebular/theme';
       [showYAxisLabel]="showYAxisLabel"
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
-      [autoScale]="autoScale">
+      [autoScale]="autoScale"
+    >
     </ngx-charts-area-chart>
   `,
-    standalone: false
+  imports: [NgxChartsModule],
 })
 export class D3AreaStackComponent implements OnDestroy {
-  multi = [{
-    name: 'Germany',
-    series: [{
-        name: '2010',
-        value: 7300000,
-      }, {
-        name: '2011',
-        value: 8940000,
-      }],
-  }, {
-    name: 'USA',
-    series: [{
-        name: '2010',
-        value: 7870000,
-      }, {
-        name: '2011',
-        value: 8270000,
-      }],
-  }, {
-    name: 'France',
-    series: [{
-        name: '2010',
-        value: 5000002,
-      }, {
-        name: '2011',
-        value: 5800000,
-      }],
-  }];
+  multi = [
+    {
+      name: "Germany",
+      series: [
+        {
+          name: "2010",
+          value: 7300000,
+        },
+        {
+          name: "2011",
+          value: 8940000,
+        },
+      ],
+    },
+    {
+      name: "USA",
+      series: [
+        {
+          name: "2010",
+          value: 7870000,
+        },
+        {
+          name: "2011",
+          value: 8270000,
+        },
+      ],
+    },
+    {
+      name: "France",
+      series: [
+        {
+          name: "2010",
+          value: 5000002,
+        },
+        {
+          name: "2011",
+          value: 5800000,
+        },
+      ],
+    },
+  ];
   showLegend = true;
   autoScale = true;
   showXAxis = true;
   showYAxis = true;
   showXAxisLabel = true;
   showYAxisLabel = true;
-  xAxisLabel = 'Country';
-  yAxisLabel = 'Population';
+  xAxisLabel = "Country";
+  yAxisLabel = "Population";
   colorScheme: any;
   themeSubscription: any;
 
   constructor(private theme: NbThemeService) {
-    this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
+    this.themeSubscription = this.theme.getJsTheme().subscribe((config) => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [
+          colors.primaryLight,
+          colors.infoLight,
+          colors.successLight,
+          colors.warningLight,
+          colors.dangerLight,
+        ],
       };
     });
   }

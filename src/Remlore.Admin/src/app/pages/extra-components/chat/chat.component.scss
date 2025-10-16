@@ -1,7 +1,5 @@
-@import 'bootstrap/scss/mixins/breakpoints';
-@import '@nebular/theme/styles/global/breakpoints';
-
-@import '../../../@theme/styles/themes';
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
 
 @include nb-install-component() {
   ::ng-deep nb-layout-column {
@@ -12,7 +10,6 @@
   nb-chat {
     margin: 3rem auto 0;
     width: 500px;
-
   }
 
   .chat-container {
@@ -33,13 +30,13 @@
     margin-top: 2.75rem;
   }
 
-  @include media-breakpoint-down(xxl) {
+  @include nebular-breakpoints.media-breakpoint-down(xxl) {
     nb-chat {
       width: 400px;
     }
   }
 
-  @include media-breakpoint-down(md) {
+  @include nebular-breakpoints.media-breakpoint-down(md) {
     nb-chat {
       width: 400px;
     }
@@ -49,7 +46,7 @@
     }
   }
 
-  @include media-breakpoint-down(is) {
+  @include nebular-breakpoints.media-breakpoint-down(is) {
     nb-chat {
       width: 300px;
     }

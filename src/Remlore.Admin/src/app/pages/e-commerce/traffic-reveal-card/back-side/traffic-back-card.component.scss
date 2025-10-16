@@ -1,19 +1,8 @@
-@import '../../../../@theme/styles/themes';
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
 
 @include nb-install-component() {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
-  nb-card-body {
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-
-  ngx-traffic-bar-chart {
-    flex: 1;
+  rl-traffic-bar-chart {
     position: relative;
 
     ::ng-deep {

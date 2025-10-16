@@ -1,21 +1,22 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { Component, OnDestroy } from "@angular/core";
+import { NbCardModule, NbIconModule, NbThemeService } from "@nebular/theme";
 
 @Component({
-    selector: 'ngx-kitten',
-    styleUrls: ['./kitten.component.scss'],
-    templateUrl: './kitten.component.html',
-    standalone: false
+  selector: "rl-kitten",
+  styleUrls: ["./kitten.component.scss"],
+  templateUrl: "./kitten.component.html",
+  imports: [NbCardModule, NbIconModule],
 })
 export class KittenComponent implements OnDestroy {
-
-  currentTheme: string;
+  currentTheme!: string;
   themeSubscription: any;
 
   constructor(private themeService: NbThemeService) {
-    this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
-      this.currentTheme = theme.name;
-    });
+    this.themeSubscription = this.themeService
+      .getJsTheme()
+      .subscribe((theme) => {
+        this.currentTheme = theme.name;
+      });
   }
 
   ngOnDestroy() {
