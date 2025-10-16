@@ -1,0 +1,20 @@
+<nb-card size="medium">
+  <nb-card-header>
+    <h3>Visitors Analytics</h3>
+    <div class="subtitle">Consumption</div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="chart-container">
+      <div class="chart-header">
+        <rl-legend-chart [legendItems]="chartLegend"></rl-legend-chart>
+      </div>
+      <rl-visitors-analytics-chart
+        [chartData]="visitorsAnalyticsData"
+      ></rl-visitors-analytics-chart>
+    </div>
+  </nb-card-body>
+
+  <rl-slide-out [showVisitorsStatistics]="true">
+    <rl-visitors-statistics [value]="pieChartValue"></rl-visitors-statistics>
+  </rl-slide-out>
+</nb-card>

@@ -1,0 +1,6 @@
+<span>Traffic</span>
+<nb-select matRipple [selected]="type" (selectedChange)="changePeriod($event)">
+  @for (period of types; track $index) {
+  <nb-option matRipple [value]="period">{{ period }}</nb-option>
+  }
+</nb-select>

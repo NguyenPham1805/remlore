@@ -1,0 +1,44 @@
+<div class="infinite-cards row">
+  <div class="col-md-12 col-lg-6 col-xxxl-6">
+    <nb-card class="own-scroll">
+      <nb-card-header>Own Scroll</nb-card-header>
+      <nb-list
+        nbInfiniteList
+        [threshold]="500"
+        (bottomThreshold)="loadNext(firstCard)"
+      >
+        @for (newsPost of firstCard.news; track newsPost) {
+        <nb-list-item>
+          <rl-news-post [post]="newsPost"></rl-news-post>
+        </nb-list-item>
+        } @for (_ of firstCard.placeholders; track $index) {
+        <nb-list-item>
+          <rl-news-post-placeholder></rl-news-post-placeholder>
+        </nb-list-item>
+        }
+      </nb-list>
+    </nb-card>
+  </div>
+
+  <div class="col-md-12 col-lg-6 col-xxxl-6">
+    <nb-card>
+      <nb-card-header>Window Scroll</nb-card-header>
+      <nb-list
+        nbInfiniteList
+        listenWindowScroll
+        [threshold]="500"
+        (bottomThreshold)="loadNext(secondCard)"
+      >
+        @for (newsPost of secondCard.news; track newsPost) {
+        <nb-list-item>
+          <rl-news-post [post]="newsPost"></rl-news-post>
+        </nb-list-item>
+        } @for (_ of secondCard.placeholders; track $index) {
+        <nb-list-item>
+          <rl-news-post-placeholder></rl-news-post-placeholder>
+        </nb-list-item>
+        }
+      </nb-list>
+    </nb-card>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+@use "@nebular/theme/styles/theming" as *;
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+
+@include nb-install-component() {
+  .solar-card nb-card-header {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  @include nebular-breakpoints.media-breakpoint-down(sm) {
+    rl-traffic {
+      display: none;
+    }
+  }
+}

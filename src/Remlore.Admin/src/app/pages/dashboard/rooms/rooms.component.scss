@@ -1,0 +1,69 @@
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
+
+@include nb-install-component() {
+  rl-room-selector {
+    width: 70%;
+    border-right: nb-theme(divider-width) nb-theme(divider-style)
+      nb-theme(divider-color);
+    background: url("../../../../assets/images/square_pattern.svg") repeat;
+    background-size: 75px;
+
+    &.dark-background {
+      background-image: url("../../../../assets/images/square_pattern_cosmic.svg");
+    }
+  }
+
+  rl-player {
+    width: 30%;
+  }
+
+  nb-card {
+    display: flex;
+    flex-direction: row;
+  }
+
+  rl-room-selector {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    ::ng-deep .room-selector {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      flex: 1;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 650px;
+      padding-bottom: 1rem;
+    }
+  }
+
+  @include nebular-breakpoints.media-breakpoint-down(md) {
+    &.expanded rl-room-selector {
+      display: none;
+    }
+
+    rl-room-selector,
+    rl-player {
+      width: 100%;
+      border: none;
+    }
+
+    nb-card {
+      flex-direction: column;
+      justify-content: space-between;
+
+      .collapse {
+        display: inline-block;
+        position: absolute;
+        top: 0.7rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+      }
+    }
+  }
+}

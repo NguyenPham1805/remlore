@@ -1,0 +1,10 @@
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+
+@mixin rl-layout() {
+  @include nebular-breakpoints.media-breakpoint-down(is) {
+    .row {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+}

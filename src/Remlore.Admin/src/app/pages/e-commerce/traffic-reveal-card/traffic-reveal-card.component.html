@@ -1,0 +1,40 @@
+<nb-reveal-card [showToggleButton]="false" [revealed]="revealed">
+  <nb-card-front>
+    <nb-card size="small">
+      <nb-card-header>
+        <rl-traffic-cards-header
+          [type]="period"
+          (periodChange)="setPeriodAngGetData($event)"
+        ></rl-traffic-cards-header>
+      </nb-card-header>
+      <rl-traffic-front-card
+        [frontCardData]="trafficListData"
+      ></rl-traffic-front-card>
+      <nb-icon
+        class="toggle-icon"
+        icon="chevron-up-outline"
+        pack="eva"
+        (click)="toggleView()"
+      ></nb-icon>
+    </nb-card>
+  </nb-card-front>
+  <nb-card-back>
+    <nb-card size="small">
+      <nb-card-header>
+        <rl-traffic-cards-header
+          [type]="period"
+          (periodChange)="setPeriodAngGetData($event)"
+        ></rl-traffic-cards-header>
+      </nb-card-header>
+      <rl-traffic-back-card
+        [trafficBarData]="trafficBarData"
+      ></rl-traffic-back-card>
+      <nb-icon
+        class="toggle-icon"
+        icon="chevron-down-outline"
+        pack="eva"
+        (click)="toggleView()"
+      ></nb-icon>
+    </nb-card>
+  </nb-card-back>
+</nb-reveal-card>

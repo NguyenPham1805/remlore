@@ -1,0 +1,13 @@
+@use "@nebular/theme/styles/theming" as *;
+
+@include nb-install-component() {
+  nb-card-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    p {
+      width: 80%;
+    }
+  }
+}

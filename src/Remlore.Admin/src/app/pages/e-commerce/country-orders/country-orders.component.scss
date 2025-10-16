@@ -1,0 +1,16 @@
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+
+@include nb-install-component() {
+  nb-card-body {
+    display: flex;
+    height: 100%;
+    padding: 0;
+  }
+
+  @include nebular-breakpoints.media-breakpoint-down(sm) {
+    nb-card-body {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@use "@nebular/theme/styles/theming" as *;
+
+@include nb-install-component() {
+  display: block;
+  flex: 1;
+  position: relative;
+
+  .echart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,21 @@
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
+
+@include nb-install-component() {
+  rl-echarts-pie,
+  rl-echarts-bar,
+  rl-echarts-line,
+  rl-echarts-multiple-xaxis,
+  rl-echarts-area-stack,
+  rl-echarts-bar-animation,
+  rl-echarts-radar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+  }
+
+  ::ng-deep .echart {
+    height: 100%;
+    width: 100%;
+  }
+}

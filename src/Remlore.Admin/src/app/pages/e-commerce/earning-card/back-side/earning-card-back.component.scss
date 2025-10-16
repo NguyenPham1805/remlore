@@ -1,0 +1,39 @@
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+
+@include nb-install-component() {
+  rl-earning-pie-chart,
+  .chart-info {
+    flex: 1;
+  }
+
+  .chart-info {
+    padding-top: 0.7rem;
+  }
+
+  .time-period {
+    margin-top: 1.5rem;
+  }
+
+  .value {
+    margin-top: 0.2rem;
+  }
+
+  .echart {
+    position: absolute;
+    width: calc(50% - 1.25rem);
+    height: calc(100% - 2rem);
+  }
+
+  // @include media-breakpoint-between(xl, xl) {
+  //   rl-earning-pie-chart {
+  //     flex: 2;
+  //   }
+  // }
+
+  // @include media-breakpoint-between(sm, sm) {
+  //   rl-earning-pie-chart {
+  //     flex: 2;
+  //   }
+  // }
+}

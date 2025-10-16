@@ -1,0 +1,6 @@
+<div class="legend">
+  @for (legend of legendItems; track $index) {
+  <div class="legend-item-color" [style.background]="legend.iconColor"></div>
+  <div class="legend-title">{{ legend.title }}</div>
+  }
+</div>

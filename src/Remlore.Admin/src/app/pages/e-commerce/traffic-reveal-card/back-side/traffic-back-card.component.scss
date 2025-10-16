@@ -1,0 +1,20 @@
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
+
+@include nb-install-component() {
+  rl-traffic-bar-chart {
+    position: relative;
+
+    ::ng-deep {
+      canvas {
+        border-bottom-left-radius: nb-theme(card-border-radius);
+        border-bottom-right-radius: nb-theme(card-border-radius);
+      }
+
+      .echart {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}

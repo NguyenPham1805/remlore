@@ -1,0 +1,24 @@
+@use "@nebular/theme/styles/theming" as *;
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+
+@include nb-install-component() {
+  padding: 1.5rem 4.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -1rem;
+
+  rl-legend-chart,
+  .period-select {
+    margin-top: 1rem;
+    @include nb-ltr(margin-left, 0.5rem);
+    @include nb-rtl(margin-right, 0.5rem);
+  }
+
+  @include nebular-breakpoints.media-breakpoint-up(md) {
+    .period-select {
+      @include nb-ltr(margin-left, auto);
+      @include nb-rtl(margin-right, auto);
+    }
+  }
+}

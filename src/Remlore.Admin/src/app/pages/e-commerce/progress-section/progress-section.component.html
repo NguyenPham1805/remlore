@@ -1,0 +1,14 @@
+<nb-card size="medium">
+  <nb-card-body>
+    @for (item of progressInfoData; track $index) {
+    <div class="progress-info">
+      <div class="subtitle">{{ item.title }}</div>
+      <div class="h3">{{ item.value | rlNumberWithCommas }}</div>
+      <nb-progress-bar [value]="item.activeProgress"></nb-progress-bar>
+      <div class="caption description">
+        <bdi>{{ item.description }}</bdi>
+      </div>
+    </div>
+    }
+  </nb-card-body>
+</nb-card>

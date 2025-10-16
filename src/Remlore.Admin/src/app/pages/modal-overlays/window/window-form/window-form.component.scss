@@ -1,0 +1,12 @@
+@use "@nebular/theme/styles/theming" as *;
+
+@include nb-install-component() {
+  ::ng-deep .form {
+    display: flex;
+    flex-direction: column;
+
+    .text-label {
+      margin-top: 1.5rem;
+    }
+  }
+}

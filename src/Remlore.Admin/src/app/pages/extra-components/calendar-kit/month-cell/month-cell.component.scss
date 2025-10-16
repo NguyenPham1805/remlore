@@ -1,0 +1,5 @@
+@use "@nebular/theme/styles/theming" as *;
+
+@include nb-install-component() {
+  padding: 1rem;
+}

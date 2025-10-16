@@ -1,0 +1,7 @@
+@use "@nebular/theme/styles/theming" as *;
+
+@include nb-install-component() {
+  nb-tab {
+    padding: 1.25rem;
+  }
+}

@@ -1,0 +1,87 @@
+sequenceDiagram
+    participant User
+    participant Angular as Angular App<br/>(localhost:4200)
+    participant AuthService
+    participant IDS as Identity Server<br/>(localhost:5001)
+    participant API as API Resource <br/> (localhost:5000)
+
+    Note over User,API: 1. Initial App Load
+    User->>Angular: Navigate to app
+    Angular->>AuthService: ngOnInit() → initAuth()
+    AuthService->>IDS: GET /.well-known/openid-configuration
+    IDS-->>AuthService: Discovery document
+    AuthService->>AuthService: Check for existing tokens
+    alt No valid tokens
+        AuthService-->>Angular: isDoneLoading$ = true, isAuthenticated$ = false
+        Angular->>User: Show login button
+    else Has valid tokens
+        AuthService-->>Angular: isDoneLoading$ = true, isAuthenticated$ = true
+        Angular->>User: Show protected content
+    end
+
+    Note over User,API: 2. User Clicks Login
+    User->>Angular: Click "Login" button
+    Angular->>AuthService: login()
+    AuthService->>AuthService: Generate PKCE code_challenge
+    AuthService->>IDS: Redirect to /connect/authorize<br/>?client_id=remlore_admin_app<br/>&response_type=code<br/>&scope=openid profile email ids_admin_api offline_access<br/>&redirect_uri=http://localhost:4200/auth/callback<br/>&code_challenge=...<br/>&state=/dashboard
+    
+    Note over User,API: 3. Authentication at IDS
+    IDS->>User: Show login page
+    User->>IDS: Enter credentials
+    IDS->>IDS: Validate credentials
+    IDS->>IDS: Check for existing authorization
+    alt Consent required
+        IDS->>User: Show consent page
+        User->>IDS: Accept consent
+    end
+    IDS->>IDS: Create authorization code
+    IDS->>Angular: Redirect to /auth/callback<br/>?code=xyz123&state=/dashboard
+
+    Note over User,API: 4. Token Exchange
+    Angular->>AuthService: AuthCallbackComponent → initAuth()
+    AuthService->>AuthService: Extract authorization code
+    AuthService->>IDS: POST /connect/token<br/>grant_type=authorization_code<br/>code=xyz123<br/>client_id=remlore_admin_app<br/>redirect_uri=...<br/>code_verifier=...
+    IDS->>IDS: Validate code & code_verifier (PKCE)
+    IDS->>IDS: Load user & create tokens
+    IDS-->>AuthService: {<br/>  access_token: "eyJhbG...",<br/>  id_token: "eyJhbG...",<br/>  refresh_token: "CfDJ8...",<br/>  expires_in: 1800<br/>}
+    AuthService->>AuthService: Store tokens in localStorage
+    AuthService->>AuthService: Extract user claims from id_token
+    AuthService-->>Angular: isAuthenticated$ = true<br/>userProfile$ = { sub, email, name, roles }
+    Angular->>User: Navigate to /dashboard
+
+    Note over User,API: 5. Making API Calls
+    User->>Angular: Interact with protected page
+    Angular->>API: GET /api/data
+    Note over Angular,API: AuthInterceptor adds header:<br/>Authorization: Bearer eyJhbG...
+    API->>API: Validate JWT token
+    API-->>Angular: Response data
+    Angular->>User: Display data
+
+    Note over User,API: 6. Token Refresh (Automatic)
+    AuthService->>AuthService: Token expires in 5 minutes
+    AuthService->>IDS: POST /connect/token<br/>grant_type=refresh_token<br/>refresh_token=CfDJ8...<br/>client_id=remlore_admin_app
+    IDS->>IDS: Validate refresh token
+    IDS->>IDS: Load user & verify can sign in
+    IDS->>IDS: Create new tokens
+    IDS-->>AuthService: {<br/>  access_token: "eyJnew...",<br/>  id_token: "eyJnew...",<br/>  refresh_token: "newCfDJ...",<br/>  expires_in: 1800<br/>}
+    AuthService->>AuthService: Update stored tokens
+    AuthService-->>Angular: Token refreshed silently
+    Note over User,Angular: User doesn't notice anything!
+
+    Note over User,API: 7. Manual Token Refresh
+    User->>Angular: Click "Refresh Token" button
+    Angular->>AuthService: refreshToken()
+    AuthService->>IDS: POST /connect/token<br/>grant_type=refresh_token<br/>refresh_token=...
+    IDS-->>AuthService: New tokens
+    AuthService-->>Angular: Success notification
+    Angular->>User: Show "Token refreshed ✅"
+
+    Note over User,API: 8. Logout
+    User->>Angular: Click "Logout" button
+    Angular->>AuthService: logout()
+    AuthService->>AuthService: Clear local tokens
+    AuthService->>IDS: Redirect to /connect/endsession<br/>?id_token_hint=...<br/>&post_logout_redirect_uri=http://localhost:4200/
+    IDS->>IDS: Terminate session
+    IDS->>Angular: Redirect to homepage
+    AuthService-->>Angular: isAuthenticated$ = false<br/>userProfile$ = null
+    Angular->>User: Show login button

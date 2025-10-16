@@ -1,32 +1,28 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    /* Bundler */
-    "baseUrl": ".",
-    "module": "ESNext",
-    "jsx": "react-jsx",
-    "allowJs": true,
-    "resolveJsonModule": true,
-
-    /* Build */
-    "target": "ES2020",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "moduleResolution": "bundler",
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "incremental": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-
-    /* Linting */
     "strict": true,
-    "noEmit": true,
-    "strictNullChecks": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve",
+    "baseUrl": "./src",
+    "paths": {
+      "@remlore/*": ["app/*"]
     }
-  ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
+    "strictTemplates": true
+  }
 }

@@ -1,0 +1,13 @@
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
+
+@include nb-install-component() {
+  button {
+    margin: 1rem;
+  }
+
+  .size-medium-group {
+    margin-top: 2rem;
+    border-top: 1px solid nb-theme(divider-color);
+  }
+}

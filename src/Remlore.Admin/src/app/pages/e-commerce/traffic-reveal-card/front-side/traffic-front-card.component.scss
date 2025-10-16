@@ -1,0 +1,44 @@
+@use "@nebular/theme/styles/global/breakpoints" as nebular-breakpoints;
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
+
+@include nb-install-component() {
+  overflow: hidden;
+
+  nb-list {
+    height: 100%;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > * {
+      flex: 1;
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .delta {
+    display: flex;
+    align-items: center;
+
+    &.down {
+      color: nb-theme(color-danger-default);
+    }
+
+    &.up {
+      color: nb-theme(color-success-default);
+    }
+  }
+
+  @include nebular-breakpoints.media-breakpoint-down(is) {
+    rl-traffic-bar {
+      display: none;
+    }
+  }
+}

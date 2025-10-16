@@ -1,0 +1,35 @@
+graph TD
+    subgraph "APPROACH 1: Traditional SPA (What you have now)"
+        A1[Angular SPA<br/>localhost:4200] -->|Login redirect| B1[Identity Server<br/>localhost:5001]
+        B1 -->|Authorization code| A1
+        A1 -->|Exchange code for tokens| B1
+        B1 -->|access_token + refresh_token<br/>stored in browser localStorage| A1
+        A1 -->|API calls with Bearer token| C1[API Server]
+        
+        style A1 fill:#ff9999
+        style B1 fill:#99ccff
+        style C1 fill:#99ff99
+    end
+    
+    subgraph "APPROACH 2: BFF Pattern (More Secure)"
+        A2[Angular SPA<br/>localhost:4200] -->|Login redirect| D2[BFF Backend<br/>.NET API<br/>localhost:5002]
+        D2 -->|Redirect to IDS| B2[Identity Server<br/>localhost:5001]
+        B2 -->|Authorization code| D2
+        D2 -->|Exchange code<br/>Tokens stored in<br/>server-side session| D2
+        D2 -->|Set HTTP-only cookie| A2
+        A2 -->|API calls with cookie| D2
+        D2 -->|Add Bearer token| C2[API Server]
+        
+        style A2 fill:#99ff99
+        style D2 fill:#ffcc99
+        style B2 fill:#99ccff
+        style C2 fill:#99ff99
+    end
+    
+    subgraph "Security Comparison"
+        T1[❌ SPA: Tokens in browser<br/>Vulnerable to XSS attacks<br/>JavaScript can access tokens]
+        T2[✅ BFF: Tokens on server<br/>Protected from XSS<br/>HTTP-only cookies<br/>No JavaScript access]
+        
+        style T1 fill:#ffcccc
+        style T2 fill:#ccffcc
+    end

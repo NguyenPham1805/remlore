@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.Security.Claims;
+using System.Text.Json;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,8 +11,6 @@ using OpenIddict.Server.AspNetCore;
 using Remlore.Identity.Data;
 using Remlore.Identity.Helpers;
 using Remlore.Identity.Services;
-using System.Security.Claims;
-using System.Text.Json;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace Remlore.Identity.Controllers
@@ -45,10 +45,12 @@ namespace Remlore.Identity.Controllers
             // authentication options shouldn't be used, a specific scheme can be specified here.
             var result = await HttpContext.AuthenticateAsync();
             if (result is not { Succeeded: true } ||
-                ((request.HasPromptValue(PromptValues.Login) || request.MaxAge is 0 ||
-                 (request.MaxAge is not null && result.Properties?.IssuedUtc is not null &&
-                  TimeProvider.System.GetUtcNow() - result.Properties.IssuedUtc > TimeSpan.FromSeconds(request.MaxAge.Value))) &&
-                TempData["IgnoreAuthenticationChallenge"] is null or false))
+                ((request.HasPromptValue(PromptValues.Login) ||
+                    request.MaxAge is 0 ||
+                    (request.MaxAge is not null &&
+                    result.Properties?.IssuedUtc is not null &&
+                    TimeProvider.System.GetUtcNow() - result.Properties.IssuedUtc > TimeSpan.FromSeconds(request.MaxAge.Value))) &&
+                    TempData["IgnoreAuthenticationChallenge"] is null or false))
             {
                 // If the client application requested promptless authentication,
                 // return an error indicating that the user is not logged in.

@@ -1,0 +1,8 @@
+@use "@nebular/theme/styles/theming" as *;
+@use "themes" as *;
+
+@include nb-install-component() {
+  .accordion-container:first-child {
+    margin-bottom: nb-theme(card-margin-bottom);
+  }
+}
